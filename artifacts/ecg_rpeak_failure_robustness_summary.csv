@@ -1,0 +1,15 @@
+source,preprocessing,detector,successful_trials,mean_rpeaks,min_rpeaks,max_rpeaks,detector_errors
+filtered,bandpass_5_20,elgendi2010,5,4.0,4,4,0
+filtered,bandpass_5_20,hamilton2002,5,3.6,3,4,0
+filtered,bandpass_5_20,neurokit,5,3.2,3,4,0
+filtered,bandpass_5_20,pantompkins1985,5,3.6,3,4,0
+filtered,linear_detrend,ecg_process_default,0,0.0,0,0,5
+filtered,median_center,ecg_process_default,0,0.0,0,0,5
+filtered,original,ecg_process_default,0,0.0,0,0,5
+raw,bandpass_5_20,elgendi2010,5,4.0,4,4,0
+raw,bandpass_5_20,hamilton2002,5,3.6,3,4,0
+raw,bandpass_5_20,neurokit,5,3.2,3,4,0
+raw,bandpass_5_20,pantompkins1985,5,3.6,3,4,0
+raw,linear_detrend,ecg_process_default,0,0.0,0,0,5
+raw,median_center,ecg_process_default,0,0.0,0,0,5
+raw,original,ecg_process_default,0,0.0,0,0,5

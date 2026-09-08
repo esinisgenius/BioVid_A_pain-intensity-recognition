@@ -1,0 +1,27 @@
+# macOS / R
+.DS_Store
+.Rhistory
+
+# BioVid raw / processed data
+biosignals_raw/
+biosignals_raw.zip
+biosignals_filtered/
+biosignals_filtered.zip
+temperature/
+temperature.zip
+starting_point/
+starting_point.zip
+
+# Dataset agreement / licensed documentation
+BioVid_AgreementPartsABCD.pdf
+
+# Large generated feature tables
+artifacts/feature_table_filtered.parquet
+artifacts/feature_table_filtered.csv
+artifacts/feature_table_filtered_all_candidates.parquet
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

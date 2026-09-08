@@ -1,0 +1,110 @@
+{
+  "n_trials": 8700,
+  "a_success_rate": 0.9994252873563219,
+  "b_success_rate": 1.0,
+  "a_fail_b_success": 5,
+  "a_success_b_fail": 0,
+  "both_success": 8695,
+  "rpeak_count_exact_agreement_both_success": 0.963887291546866,
+  "rpeak_count_within_1_both_success": 0.999884991374353,
+  "rpeak_count_diff_mean_b_minus_a": 0.0008050603795284647,
+  "rpeak_count_diff_abs_mean": 0.03622771707878091,
+  "a_rpeak_count_distribution": {
+    "count": 8700.0,
+    "mean": 6.244252873563219,
+    "std": 1.059553435383158,
+    "min": 0.0,
+    "1%": 4.0,
+    "5%": 5.0,
+    "50%": 6.0,
+    "95%": 8.0,
+    "99%": 9.0,
+    "max": 10.0
+  },
+  "b_rpeak_count_distribution": {
+    "count": 8700.0,
+    "mean": 6.246896551724138,
+    "std": 1.0465466729757913,
+    "min": 3.0,
+    "1%": 4.0,
+    "5%": 5.0,
+    "50%": 6.0,
+    "95%": 8.0,
+    "99%": 9.0,
+    "max": 10.0
+  },
+  "correlations_both_success": [
+    {
+      "feature": "rpeak_count",
+      "pearson_r_success_both": 0.9833721169051277
+    },
+    {
+      "feature": "rate_mean_bpm",
+      "pearson_r_success_both": 0.9975511707296572
+    },
+    {
+      "feature": "rate_median_bpm",
+      "pearson_r_success_both": 0.9985702406942659
+    },
+    {
+      "feature": "rate_min_bpm",
+      "pearson_r_success_both": 0.9992683070557163
+    },
+    {
+      "feature": "rate_max_bpm",
+      "pearson_r_success_both": 0.9528260107908102
+    },
+    {
+      "feature": "rate_range_bpm",
+      "pearson_r_success_both": 0.9098028874702251
+    },
+    {
+      "feature": "rate_slope_bpm_per_s",
+      "pearson_r_success_both": 0.9505853167804459
+    },
+    {
+      "feature": "rr_mean_ms",
+      "pearson_r_success_both": 0.9970491361382094
+    },
+    {
+      "feature": "rr_median_ms",
+      "pearson_r_success_both": 0.9975058892425239
+    }
+  ],
+  "a_abnormal_proportions": {
+    "failure": 0.0005747126436781609,
+    "hr_mean_not_plausible": 0.0005747126436781609,
+    "hr_min_not_plausible": 0.0005747126436781609,
+    "hr_max_not_plausible": 0.0005747126436781609,
+    "rr_mean_not_plausible": 0.0005747126436781609,
+    "rr_median_not_plausible": 0.0005747126436781609
+  },
+  "b_abnormal_proportions": {
+    "failure": 0.0,
+    "hr_mean_not_plausible": 0.0,
+    "hr_min_not_plausible": 0.0,
+    "hr_max_not_plausible": 0.0,
+    "rr_mean_not_plausible": 0.0,
+    "rr_median_not_plausible": 0.0
+  },
+  "subject_79_recovered_failures": 5,
+  "waveform_summary_correlations": [
+    {
+      "feature": "std",
+      "pearson_r_success_both": 0.8094851596683343
+    },
+    {
+      "feature": "rms",
+      "pearson_r_success_both": 0.7995603093729055
+    },
+    {
+      "feature": "peak_to_peak",
+      "pearson_r_success_both": 0.9034917158183015
+    }
+  ],
+  "waveform_summary_ratios_b_over_a": {
+    "std_median_ratio": 0.6849501118249961,
+    "rms_median_ratio": 0.6837654878036941,
+    "peak_to_peak_median_ratio": 0.6750107822084762
+  }
+}

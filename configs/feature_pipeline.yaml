@@ -1,0 +1,41 @@
+input:
+  source_dir: biosignals_filtered
+  sampling_rate_hz: 512
+  expected_rows_per_sample: 2816
+  included_channels:
+    - ecg
+    - gsr
+    - emg_trapezius
+  excluded_channels:
+    temperature: excluded_from_main_feature_table_by_phase_1_decision
+    emg_corrugator: all_zero_in_local_raw_and_filtered_data
+    emg_zygomaticus: all_zero_in_local_raw_and_filtered_data
+
+feature_sets:
+  domain_informed: primary_analysis
+  generic_automated: supplementary_only
+  shared: overlapping_or_highly_similar_summary_feature
+
+emg_activation:
+  envelope: abs_signal_smoothed_with_50_ms_moving_average
+  threshold: per_window_median_envelope_plus_3_mad_envelope
+  minimum_segment_duration_ms: 50
+  leakage_policy: no_pain_labels_no_subject_labels_no_dataset_wide_statistics
+
+ecg_beat_pipeline:
+  status: production_after_full_data_phase2_robustness_check
+  input: filtered_ecg
+  preprocessing:
+    - median_center_per_trial
+    - fixed_5_20_hz_butterworth_bandpass
+  detector: neurokit2_ecg_peaks_method_neurokit
+  feature_derivation: interval_derived_hr_and_rr_from_detected_rpeaks
+  scope: beat_derived_features_only
+  waveform_summary_policy: keep_neurokit_cleaned_filtered_ecg_waveform_summaries_not_bandpassed_summaries
+  selection_policy: chosen_without_pain_labels_or_classification_accuracy
+
+degeneracy_policy:
+  drop_if_missing_proportion_gt: 0
+  drop_if_unique_value_count_lte: 1
+  drop_if_zero_proportion_gte: 0.995
+  drop_if_std_lte: 1.0e-12

@@ -1,0 +1,63 @@
+{
+  "n_rows": 8700,
+  "n_retained_features": 72,
+  "retained_by_modality": {
+    "ECG": 25,
+    "EDA/GSR": 24,
+    "Trapezius EMG": 23
+  },
+  "retained_by_feature_set": {
+    "domain_informed": 36,
+    "generic_automated": 36
+  },
+  "retained_by_provenance": {
+    "domain_informed": 23,
+    "generic_automated": 23,
+    "shared": 26
+  },
+  "dropped_features": [],
+  "eda_scr_detection_success_rate": 0.9549425287356322,
+  "eda_scr_nonzero_trial_rate": 0.4689655172413793,
+  "eda_scr_stats": [
+    {
+      "feature_name": "eda_scr_count",
+      "mean": 0.5370114942528735,
+      "std": 0.6300409811966131,
+      "min": 0.0,
+      "max": 4.0,
+      "zero_proportion": 0.5310344827586206,
+      "missing_proportion": 0.0,
+      "unique_value_count": 5,
+      "near_constant_warning": false
+    },
+    {
+      "feature_name": "eda_scr_amplitude_max",
+      "mean": 0.07907188237466681,
+      "std": 0.1786081811054224,
+      "min": 0.0,
+      "max": 2.453371406150035,
+      "zero_proportion": 0.5310344827586206,
+      "missing_proportion": 0.0,
+      "unique_value_count": 4081,
+      "near_constant_warning": false
+    },
+    {
+      "feature_name": "eda_scr_amplitude_sum",
+      "mean": 0.08438701098559294,
+      "std": 0.19327773287179006,
+      "min": 0.0,
+      "max": 3.263455867474696,
+      "zero_proportion": 0.5310344827586206,
+      "missing_proportion": 0.0,
+      "unique_value_count": 4081,
+      "near_constant_warning": false
+    }
+  ],
+  "ecg_processing_success_rate": 1.0,
+  "ecg_rpeak_detection_success_rate": 1.0,
+  "ecg_quality_success_rate": 0.9994252873563219,
+  "ecg_rpeak_count_min": 3,
+  "ecg_rpeak_count_max": 10,
+  "emg_activation_threshold": "per-window smoothed rectified amplitude > median(envelope)+3*MAD(envelope), with 50 ms smoothing and minimum 50 ms segment duration; no labels or dataset-wide statistics",
+  "feature_table_csv_sha256": "52596fa7fbdd8f4c2a1ee9f6eb9277a36cfc6b7cdba2a0bf89780d7a6b044444"
+}
