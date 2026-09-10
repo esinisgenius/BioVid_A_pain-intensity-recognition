@@ -1,0 +1,28 @@
+task: "Phase 4: cross-model modality contribution analysis"
+phase3_dependency:
+  folds: "experiments/baselines/fold_assignments.csv"
+input_feature_table: "artifacts/feature_table_filtered.csv"
+input_feature_metadata: "artifacts/feature_metadata.json"
+feature_set: "combined_unique"
+primary_model: "xgboost"
+models:
+  - xgboost
+  - random_forest
+  - rbf_svc
+  - logistic_regression
+modality_sets:
+  full: ["ECG", "EDA/GSR", "Trapezius EMG"]
+  remove_ecg: ["EDA/GSR", "Trapezius EMG"]
+  remove_eda: ["ECG", "Trapezius EMG"]
+  remove_emg: ["ECG", "EDA/GSR"]
+  ecg_only: ["ECG"]
+  eda_only: ["EDA/GSR"]
+  emg_only: ["Trapezius EMG"]
+contribution_definition: "full performance minus performance after removing the named modality"
+split:
+  reuse_phase3_subject_folds: true
+  group_column: "subject_id"
+  random_state: 20260909
+outputs:
+  directory: "experiments/modality_contribution"
+  report: "reports/modality_contribution.md"

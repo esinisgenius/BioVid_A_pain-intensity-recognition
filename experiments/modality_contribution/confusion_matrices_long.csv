@@ -1,0 +1,701 @@
+task,model,feature_set,modality_set,modalities,n_features,true_class,pred_class,count
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,BL1,1023
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA1,325
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA2,158
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA3,140
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA4,94
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,BL1,737
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA1,364
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA2,186
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA3,234
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA4,219
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,BL1,585
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA1,341
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA2,160
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA3,321
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA4,333
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,BL1,358
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA1,255
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA2,151
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA3,361
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA4,615
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,BL1,152
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA1,164
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA2,111
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA3,329
+5class,xgboost,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA4,984
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,BL1,1012
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA1,309
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA2,174
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA3,147
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA4,98
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,BL1,734
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA1,355
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA2,188
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA3,261
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA4,202
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,BL1,601
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA1,305
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA2,183
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA3,313
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA4,338
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,BL1,333
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA1,269
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA2,184
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA3,344
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA4,610
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,BL1,138
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA1,159
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA2,137
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA3,309
+5class,xgboost,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA4,997
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,BL1,500
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA1,471
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA2,307
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA3,234
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA4,228
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,BL1,524
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA1,461
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA2,286
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA3,201
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA4,268
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,BL1,508
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA1,425
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA2,270
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA3,240
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA4,297
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,BL1,436
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA1,375
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA2,263
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA3,230
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA4,436
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,BL1,311
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA1,294
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA2,226
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA3,293
+5class,xgboost,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA4,616
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,BL1,1047
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA1,322
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA2,147
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA3,127
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA4,97
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,BL1,755
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA1,351
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA2,188
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA3,217
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA4,229
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,BL1,580
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA1,332
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA2,179
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA3,294
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA4,355
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,BL1,345
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA1,262
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA2,159
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA3,364
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA4,610
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,BL1,145
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA1,165
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA2,129
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA3,294
+5class,xgboost,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA4,1007
+5class,xgboost,combined_unique,ecg_only,ECG,23,BL1,BL1,547
+5class,xgboost,combined_unique,ecg_only,ECG,23,BL1,PA1,448
+5class,xgboost,combined_unique,ecg_only,ECG,23,BL1,PA2,276
+5class,xgboost,combined_unique,ecg_only,ECG,23,BL1,PA3,223
+5class,xgboost,combined_unique,ecg_only,ECG,23,BL1,PA4,246
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA1,BL1,511
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA1,PA1,436
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA1,PA2,305
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA1,PA3,207
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA1,PA4,281
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA2,BL1,528
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA2,PA1,402
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA2,PA2,280
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA2,PA3,229
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA2,PA4,301
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA3,BL1,443
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA3,PA1,351
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA3,PA2,260
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA3,PA3,242
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA3,PA4,444
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA4,BL1,362
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA4,PA1,281
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA4,PA2,207
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA4,PA3,287
+5class,xgboost,combined_unique,ecg_only,ECG,23,PA4,PA4,603
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,BL1,BL1,1050
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,BL1,PA1,304
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,BL1,PA2,166
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,BL1,PA3,131
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,BL1,PA4,89
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA1,BL1,766
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA1,PA1,336
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA1,PA2,192
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA1,PA3,251
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA1,PA4,195
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA2,BL1,605
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA2,PA1,291
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA2,PA2,193
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA2,PA3,301
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA2,PA4,350
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA3,BL1,355
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA3,PA1,241
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA3,PA2,183
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA3,PA3,340
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA3,PA4,621
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA4,BL1,149
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA4,PA1,142
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA4,PA2,163
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA4,PA3,306
+5class,xgboost,combined_unique,eda_only,EDA/GSR,17,PA4,PA4,980
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,BL1,BL1,418
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,BL1,PA1,391
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,BL1,PA2,363
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,BL1,PA3,304
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,BL1,PA4,264
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA1,BL1,415
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA1,PA1,415
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA1,PA2,364
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA1,PA3,249
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA1,PA4,297
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA2,BL1,443
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA2,PA1,380
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA2,PA2,324
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA2,PA3,268
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA2,PA4,325
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA3,BL1,355
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA3,PA1,346
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA3,PA2,351
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA3,PA3,301
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA3,PA4,387
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA4,BL1,339
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA4,PA1,321
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA4,PA2,313
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA4,PA3,293
+5class,xgboost,combined_unique,emg_only,Trapezius EMG,19,PA4,PA4,474
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,BL1,994
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA1,365
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA2,171
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA3,127
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA4,83
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,BL1,727
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA1,379
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA2,214
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA3,201
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA4,219
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,BL1,599
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA1,341
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA2,184
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA3,279
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA4,337
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,BL1,374
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA1,222
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA2,222
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA3,310
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA4,612
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,BL1,146
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA1,168
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA2,156
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA3,331
+5class,random_forest,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA4,939
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,BL1,891
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA1,386
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA2,230
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA3,139
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA4,94
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,BL1,658
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA1,360
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA2,277
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA3,242
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA4,203
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,BL1,534
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA1,332
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA2,241
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA3,304
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA4,329
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,BL1,307
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA1,287
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA2,244
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA3,360
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA4,542
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,BL1,128
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA1,163
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA2,197
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA3,356
+5class,random_forest,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA4,896
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,BL1,511
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA1,419
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA2,296
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA3,208
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA4,306
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,BL1,532
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA1,413
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA2,268
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA3,207
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA4,320
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,BL1,485
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA1,394
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA2,276
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA3,238
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA4,347
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,BL1,411
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA1,363
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA2,258
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA3,244
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA4,464
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,BL1,303
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA1,310
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA2,226
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA3,244
+5class,random_forest,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA4,657
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,BL1,955
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA1,372
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA2,196
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA3,125
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA4,92
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,BL1,680
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA1,407
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA2,225
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA3,220
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA4,208
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,BL1,568
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA1,349
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA2,204
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA3,281
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA4,338
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,BL1,335
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA1,282
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA2,204
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA3,343
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA4,576
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,BL1,137
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA1,197
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA2,156
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA3,323
+5class,random_forest,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA4,927
+5class,random_forest,combined_unique,ecg_only,ECG,23,BL1,BL1,513
+5class,random_forest,combined_unique,ecg_only,ECG,23,BL1,PA1,395
+5class,random_forest,combined_unique,ecg_only,ECG,23,BL1,PA2,313
+5class,random_forest,combined_unique,ecg_only,ECG,23,BL1,PA3,243
+5class,random_forest,combined_unique,ecg_only,ECG,23,BL1,PA4,276
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA1,BL1,505
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA1,PA1,434
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA1,PA2,270
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA1,PA3,232
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA1,PA4,299
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA2,BL1,509
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA2,PA1,406
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA2,PA2,260
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA2,PA3,273
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA2,PA4,292
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA3,BL1,442
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA3,PA1,354
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA3,PA2,247
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA3,PA3,246
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA3,PA4,451
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA4,BL1,368
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA4,PA1,311
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA4,PA2,222
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA4,PA3,248
+5class,random_forest,combined_unique,ecg_only,ECG,23,PA4,PA4,591
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,BL1,BL1,752
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,BL1,PA1,453
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,BL1,PA2,278
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,BL1,PA3,159
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,BL1,PA4,98
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA1,BL1,581
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA1,PA1,372
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA1,PA2,333
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA1,PA3,259
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA1,PA4,195
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA2,BL1,436
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA2,PA1,388
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA2,PA2,293
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA2,PA3,317
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA2,PA4,306
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA3,BL1,256
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA3,PA1,311
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA3,PA2,285
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA3,PA3,362
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA3,PA4,526
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA4,BL1,122
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA4,PA1,182
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA4,PA2,218
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA4,PA3,402
+5class,random_forest,combined_unique,eda_only,EDA/GSR,17,PA4,PA4,816
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,BL1,BL1,387
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,BL1,PA1,365
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,BL1,PA2,310
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,BL1,PA3,352
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,BL1,PA4,326
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA1,BL1,388
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA1,PA1,382
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA1,PA2,317
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA1,PA3,326
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA1,PA4,327
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA2,BL1,374
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA2,PA1,342
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA2,PA2,332
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA2,PA3,310
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA2,PA4,382
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA3,BL1,386
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA3,PA1,343
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA3,PA2,287
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA3,PA3,339
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA3,PA4,385
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA4,BL1,345
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA4,PA1,333
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA4,PA2,285
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA4,PA3,319
+5class,random_forest,combined_unique,emg_only,Trapezius EMG,19,PA4,PA4,458
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,BL1,1224
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA1,193
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA2,137
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA3,76
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA4,110
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,BL1,994
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA1,228
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA2,194
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA3,139
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA4,185
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,BL1,845
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA1,223
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA2,172
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA3,190
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA4,310
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,BL1,609
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA1,169
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA2,184
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA3,226
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA4,552
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,BL1,331
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA1,115
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA2,137
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA3,253
+5class,rbf_svc,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA4,904
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,BL1,1253
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA1,212
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA2,81
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA3,88
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA4,106
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,BL1,1053
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA1,205
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA2,125
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA3,173
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA4,184
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,BL1,898
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA1,221
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA2,99
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA3,203
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA4,319
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,BL1,652
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA1,169
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA2,103
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA3,242
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA4,574
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,BL1,384
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA1,95
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA2,69
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA3,235
+5class,rbf_svc,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA4,957
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,BL1,656
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA1,525
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA2,215
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA3,156
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA4,188
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,BL1,631
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA1,517
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA2,226
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA3,153
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA4,213
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,BL1,603
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA1,498
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA2,222
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA3,193
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA4,224
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,BL1,521
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA1,441
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA2,244
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA3,183
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA4,351
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,BL1,407
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA1,380
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA2,205
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA3,211
+5class,rbf_svc,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA4,537
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,BL1,1274
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA1,184
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA2,150
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA3,71
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA4,61
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,BL1,1063
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA1,175
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA2,192
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA3,143
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA4,167
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,BL1,881
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA1,199
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA2,195
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA3,184
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA4,281
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,BL1,659
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA1,156
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA2,172
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA3,221
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA4,532
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,BL1,363
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA1,119
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA2,135
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA3,218
+5class,rbf_svc,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA4,905
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,BL1,BL1,773
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,BL1,PA1,441
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,BL1,PA2,207
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,BL1,PA3,162
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,BL1,PA4,157
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA1,BL1,769
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA1,PA1,413
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA1,PA2,213
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA1,PA3,144
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA1,PA4,201
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA2,BL1,718
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA2,PA1,429
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA2,PA2,193
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA2,PA3,188
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA2,PA4,212
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA3,BL1,626
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA3,PA1,372
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA3,PA2,197
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA3,PA3,206
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA3,PA4,339
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA4,BL1,484
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA4,PA1,340
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA4,PA2,157
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA4,PA3,258
+5class,rbf_svc,combined_unique,ecg_only,ECG,23,PA4,PA4,501
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,BL1,BL1,1355
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,BL1,PA1,149
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,BL1,PA2,95
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,BL1,PA3,90
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,BL1,PA4,51
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA1,BL1,1132
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA1,PA1,131
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA1,PA2,134
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA1,PA3,186
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA1,PA4,157
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA2,BL1,956
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA2,PA1,149
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA2,PA2,113
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA2,PA3,219
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA2,PA4,303
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA3,BL1,714
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA3,PA1,111
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA3,PA2,104
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA3,PA3,245
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA3,PA4,566
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA4,BL1,423
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA4,PA1,82
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA4,PA2,66
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA4,PA3,229
+5class,rbf_svc,combined_unique,eda_only,EDA/GSR,17,PA4,PA4,940
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,BL1,BL1,580
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,BL1,PA1,649
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,BL1,PA2,212
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,BL1,PA3,87
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,BL1,PA4,212
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA1,BL1,572
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA1,PA1,677
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA1,PA2,187
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA1,PA3,104
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA1,PA4,200
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA2,BL1,547
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA2,PA1,660
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA2,PA2,183
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA2,PA3,98
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA2,PA4,252
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA3,BL1,510
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA3,PA1,652
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA3,PA2,160
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA3,PA3,98
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA3,PA4,320
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA4,BL1,433
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA4,PA1,628
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA4,PA2,163
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA4,PA3,133
+5class,rbf_svc,combined_unique,emg_only,Trapezius EMG,19,PA4,PA4,383
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,BL1,1088
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA1,302
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA2,139
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA3,112
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,BL1,PA4,99
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,BL1,788
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA1,387
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA2,172
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA3,172
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA1,PA4,221
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,BL1,636
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA1,353
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA2,190
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA3,241
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA2,PA4,320
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,BL1,433
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA1,260
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA2,178
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA3,259
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA3,PA4,610
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,BL1,194
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA1,179
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA2,142
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA3,240
+5class,logistic_regression,combined_unique,full,ECG+EDA/GSR+Trapezius EMG,59,PA4,PA4,985
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,BL1,1152
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA1,288
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA2,109
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA3,93
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,BL1,PA4,98
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,BL1,849
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA1,356
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA2,149
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA3,166
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA1,PA4,220
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,BL1,701
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA1,324
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA2,132
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA3,234
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA2,PA4,349
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,BL1,482
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA1,265
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA2,135
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA3,236
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA3,PA4,622
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,BL1,210
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA1,209
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA2,106
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA3,207
+5class,logistic_regression,combined_unique,remove_ecg,EDA/GSR+Trapezius EMG,36,PA4,PA4,1008
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,BL1,587
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA1,423
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA2,214
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA3,203
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,BL1,PA4,313
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,BL1,566
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA1,417
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA2,256
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA3,177
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA1,PA4,324
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,BL1,559
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA1,387
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA2,227
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA3,207
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA2,PA4,360
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,BL1,469
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA1,350
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA2,200
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA3,217
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA3,PA4,504
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,BL1,354
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA1,295
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA2,180
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA3,212
+5class,logistic_regression,combined_unique,remove_eda,ECG+Trapezius EMG,42,PA4,PA4,699
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,BL1,1141
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA1,306
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA2,110
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA3,96
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,BL1,PA4,87
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,BL1,876
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA1,334
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA2,149
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA3,165
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA1,PA4,216
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,BL1,684
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA1,341
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA2,154
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA3,233
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA2,PA4,328
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,BL1,462
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA1,254
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA2,166
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA3,249
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA3,PA4,609
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,BL1,207
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA1,170
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA2,126
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA3,236
+5class,logistic_regression,combined_unique,remove_emg,ECG+EDA/GSR,40,PA4,PA4,1001
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,BL1,BL1,666
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,BL1,PA1,351
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,BL1,PA2,204
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,BL1,PA3,193
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,BL1,PA4,326
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA1,BL1,639
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA1,PA1,361
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA1,PA2,229
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA1,PA3,178
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA1,PA4,333
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA2,BL1,575
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA2,PA1,354
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA2,PA2,224
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA2,PA3,204
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA2,PA4,383
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA3,BL1,499
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA3,PA1,309
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA3,PA2,187
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA3,PA3,218
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA3,PA4,527
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA4,BL1,381
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA4,PA1,229
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA4,PA2,165
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA4,PA3,196
+5class,logistic_regression,combined_unique,ecg_only,ECG,23,PA4,PA4,769
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,BL1,BL1,1242
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,BL1,PA1,259
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,BL1,PA2,72
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,BL1,PA3,76
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,BL1,PA4,91
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA1,BL1,959
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA1,PA1,290
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA1,PA2,106
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA1,PA3,163
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA1,PA4,222
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA2,BL1,776
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA2,PA1,282
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA2,PA2,110
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA2,PA3,213
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA2,PA4,359
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA3,BL1,532
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA3,PA1,245
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA3,PA2,111
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA3,PA3,209
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA3,PA4,643
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA4,BL1,240
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA4,PA1,189
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA4,PA2,80
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA4,PA3,183
+5class,logistic_regression,combined_unique,eda_only,EDA/GSR,17,PA4,PA4,1048
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,BL1,BL1,652
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,BL1,PA1,450
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,BL1,PA2,255
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,BL1,PA3,138
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,BL1,PA4,245
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA1,BL1,583
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA1,PA1,519
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA1,PA2,267
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA1,PA3,124
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA1,PA4,247
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA2,BL1,592
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA2,PA1,475
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA2,PA2,273
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA2,PA3,135
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA2,PA4,265
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA3,BL1,545
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA3,PA1,466
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA3,PA2,253
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA3,PA3,125
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA3,PA4,351
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA4,BL1,458
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA4,PA1,467
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA4,PA2,249
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA4,PA3,163
+5class,logistic_regression,combined_unique,emg_only,Trapezius EMG,19,PA4,PA4,403

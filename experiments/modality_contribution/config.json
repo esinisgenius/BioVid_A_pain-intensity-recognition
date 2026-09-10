@@ -1,0 +1,59 @@
+{
+  "run_date_utc": "2026-09-10T05:59:42Z",
+  "phase3_folds": "experiments/baselines/fold_assignments.csv",
+  "task": "5class",
+  "classes": [
+    "BL1",
+    "PA1",
+    "PA2",
+    "PA3",
+    "PA4"
+  ],
+  "feature_set": "combined_unique",
+  "primary_model": "xgboost",
+  "models": [
+    "xgboost",
+    "random_forest",
+    "rbf_svc",
+    "logistic_regression"
+  ],
+  "modality_sets": {
+    "full": [
+      "ECG",
+      "EDA/GSR",
+      "Trapezius EMG"
+    ],
+    "remove_ecg": [
+      "EDA/GSR",
+      "Trapezius EMG"
+    ],
+    "remove_eda": [
+      "ECG",
+      "Trapezius EMG"
+    ],
+    "remove_emg": [
+      "ECG",
+      "EDA/GSR"
+    ],
+    "ecg_only": [
+      "ECG"
+    ],
+    "eda_only": [
+      "EDA/GSR"
+    ],
+    "emg_only": [
+      "Trapezius EMG"
+    ]
+  },
+  "contribution_definition": "full performance minus performance without the named modality",
+  "random_state": 20260909,
+  "set_n_features": {
+    "full": 59,
+    "remove_ecg": 36,
+    "remove_eda": 42,
+    "remove_emg": 40,
+    "ecg_only": 23,
+    "eda_only": 17,
+    "emg_only": 19
+  }
+}
