@@ -1,0 +1,25 @@
+task: "5-class classification: BL1 / PA1 / PA2 / PA3 / PA4"
+input_feature_table: "artifacts/feature_table_filtered.csv"
+input_feature_metadata: "artifacts/feature_metadata.json"
+split:
+  protocol: "StratifiedGroupKFold"
+  n_splits: 5
+  shuffle: true
+  random_state: 20260909
+  group_column: "subject_id"
+models:
+  - logistic_regression
+  - random_forest
+feature_sets:
+  - domain_informed
+  - generic_automated
+  - combined_unique
+  - ecg_unimodal
+  - eda_gsr_unimodal
+  - emg_trapezius_unimodal
+outputs:
+  directory: "experiments/baselines"
+  fold_assignments: "fold_assignments.csv"
+  out_of_fold_predictions: "out_of_fold_predictions.csv"
+  metrics: "metrics.json"
+  feature_set_manifest: "feature_set_manifest.csv"

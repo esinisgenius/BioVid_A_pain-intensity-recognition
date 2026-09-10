@@ -1,0 +1,25 @@
+{
+  "seed": 20260909,
+  "epochs": 15,
+  "batch_size": 128,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "device": "mps",
+  "input_source": "biosignals_filtered",
+  "input_shape": [
+    2816,
+    3
+  ],
+  "channels": [
+    "ecg",
+    "gsr",
+    "emg_trapezius"
+  ],
+  "architecture": [
+    "Conv1d(3,16,kernel=15,stride=2,padding=7) + BatchNorm + ReLU + MaxPool1d(4)",
+    "Conv1d(16,32,kernel=9,stride=2,padding=4) + BatchNorm + ReLU + MaxPool1d(4)",
+    "Conv1d(32,64,kernel=7,stride=2,padding=3) + BatchNorm + ReLU + AdaptiveAvgPool1d(1)",
+    "Dropout(0.2) + Linear(64,n_classes)"
+  ],
+  "normalization": "Per fold, channel mean/std estimated only from training subjects and applied to train/test windows."
+}

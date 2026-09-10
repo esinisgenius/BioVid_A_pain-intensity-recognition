@@ -19,6 +19,7 @@ BioVid_AgreementPartsABCD.pdf
 artifacts/feature_table_filtered.parquet
 artifacts/feature_table_filtered.csv
 artifacts/feature_table_filtered_all_candidates.parquet
+experiments/**/filtered_signal_tensor_*.npz
 
 # Python
 __pycache__/

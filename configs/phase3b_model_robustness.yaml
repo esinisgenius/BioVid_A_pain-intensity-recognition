@@ -1,0 +1,27 @@
+task: "Phase 3B: model robustness + BL1 vs PA4 binary benchmark"
+phase3_dependency:
+  folds: "experiments/baselines/fold_assignments.csv"
+  unchanged_metrics: "experiments/baselines/metrics.json"
+input_feature_table: "artifacts/feature_table_filtered.csv"
+input_feature_metadata: "artifacts/feature_metadata.json"
+feature_set: "combined_unique"
+models:
+  five_class:
+    - logistic_regression
+    - random_forest
+    - rbf_svc
+  binary_bl1_vs_pa4:
+    - logistic_regression
+    - random_forest
+    - rbf_svc
+rbf_svc:
+  kernel: "rbf"
+  C: 1.0
+  gamma: "scale"
+  decision_function_shape: "ovr"
+split:
+  reuse_phase3_subject_folds: true
+  group_column: "subject_id"
+  random_state: 20260909
+outputs:
+  directory: "experiments/phase3b_model_robustness"

@@ -1,0 +1,40 @@
+task: "Model-strengthening benchmark: XGBoost + tiny 1D-CNN"
+phase3_dependency:
+  folds: "experiments/baselines/fold_assignments.csv"
+  feature_table: "artifacts/feature_table_filtered.csv"
+feature_based:
+  feature_set: "combined_unique"
+  models:
+    - logistic_regression
+    - random_forest
+    - rbf_svc
+    - xgboost
+  xgboost:
+    n_estimators: 300
+    max_depth: 3
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
+    reg_lambda: 1.0
+    objective: "multi:softprob"
+    eval_metric: "mlogloss"
+raw_signal_cnn:
+  source: "biosignals_filtered"
+  channels:
+    - ecg
+    - gsr
+    - emg_trapezius
+  input_shape: [2816, 3]
+  architecture: "tiny fixed 1D-CNN, no LSTM/Transformer/attention"
+  epochs: 15
+  batch_size: 128
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  normalization: "fit channel mean/std on training subjects only in each fold"
+tasks:
+  - "5class: BL1 / PA1 / PA2 / PA3 / PA4"
+  - "binary: BL1 vs PA4"
+random_state: 20260909
+outputs:
+  directory: "experiments/model_strengthening_benchmark"
+  report: "reports/model_strengthening_benchmark.md"

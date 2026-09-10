@@ -1,0 +1,22 @@
+{
+  "run_date_utc": "2026-09-09T05:55:26Z",
+  "phase3_dependency": "Reuses experiments/baselines/fold_assignments.csv and Phase 3 LR/RF combined_unique metrics unchanged.",
+  "feature_set": "combined_unique",
+  "n_features": 59,
+  "models": [
+    "logistic_regression",
+    "random_forest",
+    "rbf_svc"
+  ],
+  "svm_config": {
+    "kernel": "rbf",
+    "C": 1.0,
+    "gamma": "scale",
+    "decision_function_shape": "ovr"
+  },
+  "binary_task": {
+    "negative_class": "BL1",
+    "positive_class": "PA4"
+  },
+  "random_state": 20260909
+}
