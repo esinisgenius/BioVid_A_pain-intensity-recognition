@@ -1,0 +1,3 @@
+model,feature_set,modality_set,n,accuracy,mean_absolute_class_error,within_one_class_proportion,severe_error_rate_abs_ge_2,exact_error_rate
+logistic_regression,combined_unique,full,8700,0.33436781609195404,1.1757471264367816,0.6658620689655173,0.33413793103448275,0.665632183908046
+xgboost,combined_unique,full,8700,0.33241379310344826,1.1475862068965517,0.677816091954023,0.322183908045977,0.6675862068965517

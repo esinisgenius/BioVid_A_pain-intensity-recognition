@@ -1,0 +1,60 @@
+model,feature_set,feature_name,modality,provenance,mean_gain_importance,sd_gain_importance,positive_gain_fold_prop
+xgboost,combined_unique,ecg__tsfresh_abs_energy,ECG,generic_automated,4.639060306549072,0.2472308968281434,1.0
+xgboost,combined_unique,ecg__tsfresh_absolute_sum_of_changes,ECG,generic_automated,4.600726699829101,0.3325771905089312,1.0
+xgboost,combined_unique,ecg__tsfresh_kurtosis,ECG,generic_automated,3.9367090225219727,0.5009399883196588,1.0
+xgboost,combined_unique,ecg__tsfresh_linear_trend_slope,ECG,generic_automated,3.975162076950073,0.21131826998523584,1.0
+xgboost,combined_unique,ecg__tsfresh_maximum,ECG,generic_automated,4.158537483215332,0.19633694291197595,1.0
+xgboost,combined_unique,ecg__tsfresh_mean,ECG,generic_automated,3.7590263366699217,0.22189490169640003,1.0
+xgboost,combined_unique,ecg__tsfresh_mean_change,ECG,generic_automated,3.4608217239379884,0.06613643953066735,1.0
+xgboost,combined_unique,ecg__tsfresh_median,ECG,generic_automated,3.918339157104492,0.2751378799567852,1.0
+xgboost,combined_unique,ecg__tsfresh_minimum,ECG,generic_automated,4.109617233276367,0.13545459071221366,1.0
+xgboost,combined_unique,ecg__tsfresh_skewness,ECG,generic_automated,3.929815244674683,0.31370420360345264,1.0
+xgboost,combined_unique,ecg_clean_peak_to_peak,ECG,domain_informed,3.545571708679199,0.1038497192431591,1.0
+xgboost,combined_unique,ecg_clean_rms,ECG,shared,3.9070569038391114,0.2632878862927692,1.0
+xgboost,combined_unique,ecg_clean_std,ECG,shared,3.7896255016326905,0.19261966771444042,1.0
+xgboost,combined_unique,ecg_quality_mean,ECG,domain_informed,3.366176795959473,0.14442009241876916,1.0
+xgboost,combined_unique,ecg_rate_max_bpm,ECG,domain_informed,3.712866735458374,0.2529029969771224,1.0
+xgboost,combined_unique,ecg_rate_mean_bpm,ECG,domain_informed,3.5486573219299316,0.10603425612213312,1.0
+xgboost,combined_unique,ecg_rate_median_bpm,ECG,domain_informed,3.927274560928345,0.28305957428759926,1.0
+xgboost,combined_unique,ecg_rate_min_bpm,ECG,domain_informed,3.680314636230469,0.21250942412146587,1.0
+xgboost,combined_unique,ecg_rate_range_bpm,ECG,domain_informed,3.457172966003418,0.12417172463244694,1.0
+xgboost,combined_unique,ecg_rate_slope_bpm_per_s,ECG,domain_informed,4.218449497222901,0.173501900259726,1.0
+xgboost,combined_unique,ecg_rpeak_count,ECG,domain_informed,3.4158785343170166,0.3913686162051656,1.0
+xgboost,combined_unique,ecg_rr_mean_ms,ECG,domain_informed,3.9620172500610353,0.19713093304934007,1.0
+xgboost,combined_unique,ecg_rr_median_ms,ECG,domain_informed,4.034045648574829,0.15568935799963818,1.0
+xgboost,combined_unique,eda__tsfresh_abs_energy,EDA/GSR,generic_automated,11.328953647613526,7.736353074017006,1.0
+xgboost,combined_unique,eda__tsfresh_absolute_sum_of_changes,EDA/GSR,generic_automated,4.249586772918701,0.1876529568332231,1.0
+xgboost,combined_unique,eda__tsfresh_kurtosis,EDA/GSR,generic_automated,4.430376052856445,0.2018920264350489,1.0
+xgboost,combined_unique,eda__tsfresh_root_mean_square,EDA/GSR,generic_automated,6.2451272964477536,1.1654806805991869,1.0
+xgboost,combined_unique,eda__tsfresh_skewness,EDA/GSR,generic_automated,6.392950534820557,0.604748501591309,1.0
+xgboost,combined_unique,eda_scl_auc,EDA/GSR,domain_informed,5.596409702301026,1.6705680757559551,1.0
+xgboost,combined_unique,eda_scl_delta,EDA/GSR,shared,20.691204452514647,0.2930499775184962,1.0
+xgboost,combined_unique,eda_scl_max,EDA/GSR,shared,4.539411354064941,0.3322064385238444,1.0
+xgboost,combined_unique,eda_scl_mean,EDA/GSR,shared,4.769304943084717,0.18577291027425194,1.0
+xgboost,combined_unique,eda_scl_median,EDA/GSR,shared,5.803217887878418,0.7607120959700572,1.0
+xgboost,combined_unique,eda_scl_min,EDA/GSR,shared,5.49378080368042,0.4170329144489333,1.0
+xgboost,combined_unique,eda_scl_range,EDA/GSR,domain_informed,4.698466014862061,0.2361301937612536,1.0
+xgboost,combined_unique,eda_scl_slope_per_s,EDA/GSR,shared,9.658064270019532,0.46712555272211354,1.0
+xgboost,combined_unique,eda_scl_std,EDA/GSR,shared,4.956435585021973,0.4124428014210248,1.0
+xgboost,combined_unique,eda_scr_amplitude_max,EDA/GSR,domain_informed,5.81024866104126,0.5106143478632127,1.0
+xgboost,combined_unique,eda_scr_amplitude_sum,EDA/GSR,domain_informed,6.408582592010498,0.2300496268748145,1.0
+xgboost,combined_unique,eda_scr_count,EDA/GSR,domain_informed,3.3668769359588624,0.3255004984013978,1.0
+xgboost,combined_unique,emg_trapezius__tsfresh_kurtosis,Trapezius EMG,generic_automated,3.6331504344940186,0.20714371109642685,1.0
+xgboost,combined_unique,emg_trapezius__tsfresh_linear_trend_slope,Trapezius EMG,generic_automated,3.499635362625122,0.1377445040482422,1.0
+xgboost,combined_unique,emg_trapezius__tsfresh_maximum,Trapezius EMG,generic_automated,3.803154230117798,0.30372125936659666,1.0
+xgboost,combined_unique,emg_trapezius__tsfresh_mean,Trapezius EMG,generic_automated,3.4707569122314452,0.0893866296775937,1.0
+xgboost,combined_unique,emg_trapezius__tsfresh_mean_change,Trapezius EMG,generic_automated,3.4718409061431883,0.10985808548563625,1.0
+xgboost,combined_unique,emg_trapezius__tsfresh_median,Trapezius EMG,generic_automated,3.6971192359924316,0.1367107727739497,1.0
+xgboost,combined_unique,emg_trapezius__tsfresh_minimum,Trapezius EMG,generic_automated,3.6940110683441163,0.148677996049444,1.0
+xgboost,combined_unique,emg_trapezius__tsfresh_skewness,Trapezius EMG,generic_automated,3.4632942199707033,0.14064348455674158,1.0
+xgboost,combined_unique,emg_trapezius_activation_count,Trapezius EMG,domain_informed,3.569440221786499,0.2591139656413662,1.0
+xgboost,combined_unique,emg_trapezius_activation_fraction,Trapezius EMG,domain_informed,3.506263780593872,0.10065663525593824,1.0
+xgboost,combined_unique,emg_trapezius_activation_mean_duration_s,Trapezius EMG,domain_informed,3.6729524612426756,0.16575025892359949,1.0
+xgboost,combined_unique,emg_trapezius_energy,Trapezius EMG,shared,3.545505666732788,1.1010598391645072,1.0
+xgboost,combined_unique,emg_trapezius_iemg,Trapezius EMG,domain_informed,3.605222463607788,0.130013648862328,1.0
+xgboost,combined_unique,emg_trapezius_mav,Trapezius EMG,domain_informed,3.553629159927368,0.12212573421546954,1.0
+xgboost,combined_unique,emg_trapezius_peak_to_peak,Trapezius EMG,domain_informed,3.8041232585906983,0.42935128690785374,1.0
+xgboost,combined_unique,emg_trapezius_rms,Trapezius EMG,shared,3.636323595046997,0.10302563716843509,1.0
+xgboost,combined_unique,emg_trapezius_std,Trapezius EMG,shared,3.963148307800293,0.5446265494558786,1.0
+xgboost,combined_unique,emg_trapezius_waveform_length,Trapezius EMG,shared,3.9577732563018797,0.07387361940295549,1.0
+xgboost,combined_unique,emg_trapezius_zero_crossings,Trapezius EMG,domain_informed,3.464584302902222,0.159397272616628,1.0

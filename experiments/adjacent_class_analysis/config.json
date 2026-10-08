@@ -1,0 +1,106 @@
+{
+  "run_date_utc": "2026-10-07T05:19:59Z",
+  "feature_table": "artifacts/feature_table_filtered.csv",
+  "feature_metadata": "artifacts/feature_metadata.json",
+  "fold_assignments": "experiments/baselines/fold_assignments.csv",
+  "multiclass_oof": "experiments/modality_contribution/oof_predictions.csv",
+  "feature_set": "combined_unique",
+  "random_state": 20260909,
+  "pairs": [
+    [
+      "PA1_vs_PA2",
+      1,
+      2
+    ],
+    [
+      "PA2_vs_PA3",
+      2,
+      3
+    ],
+    [
+      "PA1_vs_PA3",
+      1,
+      3
+    ],
+    [
+      "BL1_vs_PA4",
+      0,
+      4
+    ]
+  ],
+  "modality_sets": {
+    "ecg_only": [
+      "ECG"
+    ],
+    "eda_only": [
+      "EDA/GSR"
+    ],
+    "emg_only": [
+      "Trapezius EMG"
+    ],
+    "ecg_eda": [
+      "ECG",
+      "EDA/GSR"
+    ],
+    "eda_emg": [
+      "EDA/GSR",
+      "Trapezius EMG"
+    ],
+    "ecg_emg": [
+      "ECG",
+      "Trapezius EMG"
+    ],
+    "all_modalities": [
+      "ECG",
+      "EDA/GSR",
+      "Trapezius EMG"
+    ]
+  },
+  "targeted_interactions": [
+    [
+      "eda_scl_delta__x__emg_trapezius__tsfresh_linear_trend_slope",
+      "eda_scl_delta",
+      "emg_trapezius__tsfresh_linear_trend_slope"
+    ],
+    [
+      "eda_scl_delta__x__emg_trapezius__tsfresh_kurtosis",
+      "eda_scl_delta",
+      "emg_trapezius__tsfresh_kurtosis"
+    ],
+    [
+      "eda_scl_slope_per_s__x__emg_trapezius__tsfresh_linear_trend_slope",
+      "eda_scl_slope_per_s",
+      "emg_trapezius__tsfresh_linear_trend_slope"
+    ],
+    [
+      "eda_scl_slope_per_s__x__emg_trapezius__tsfresh_kurtosis",
+      "eda_scl_slope_per_s",
+      "emg_trapezius__tsfresh_kurtosis"
+    ],
+    [
+      "eda__tsfresh_kurtosis__x__emg_trapezius__tsfresh_linear_trend_slope",
+      "eda__tsfresh_kurtosis",
+      "emg_trapezius__tsfresh_linear_trend_slope"
+    ],
+    [
+      "eda__tsfresh_kurtosis__x__emg_trapezius__tsfresh_kurtosis",
+      "eda__tsfresh_kurtosis",
+      "emg_trapezius__tsfresh_kurtosis"
+    ],
+    [
+      "eda_scl_min__x__emg_trapezius__tsfresh_linear_trend_slope",
+      "eda_scl_min",
+      "emg_trapezius__tsfresh_linear_trend_slope"
+    ],
+    [
+      "eda_scl_min__x__emg_trapezius__tsfresh_kurtosis",
+      "eda_scl_min",
+      "emg_trapezius__tsfresh_kurtosis"
+    ]
+  ],
+  "key_pdp_features": [
+    "eda_scl_delta",
+    "eda_scl_slope_per_s",
+    "emg_trapezius__tsfresh_linear_trend_slope"
+  ]
+}

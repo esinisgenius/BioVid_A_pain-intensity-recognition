@@ -1,0 +1,19 @@
+pain_class,modality,modality_name,feature_name,xgboost_mean_abs_shap,xgboost_rank_all_features,xgboost_signed_direction,xgboost_fold_top10_frequency,random_forest_rank_all_features,random_forest_top10,random_forest_signed_direction,logistic_regression_rank_all_features,logistic_regression_top10,logistic_regression_signed_direction,xgboost_top_feature_group_delta_f1,xgboost_top_feature_group_positive_fold_prop,logistic_regression_top_feature_group_delta_f1,logistic_regression_top_feature_group_positive_fold_prop
+BL1,eda,EDA/GSR,eda_scl_delta,0.6669467578156603,1.0,1.0,1.0,1.0,True,,1.0,True,-1.0,0.04177164976960501,1.0,0.04643193125479554,1.0
+BL1,eda,EDA/GSR,eda__tsfresh_skewness,0.20496927054413158,2.0,1.0,1.0,3.0,True,,6.0,True,-1.0,0.04177164976960501,1.0,0.04643193125479554,1.0
+BL1,eda,EDA/GSR,eda_scl_slope_per_s,0.08045145764979532,3.0,1.0,1.0,2.0,True,,4.0,True,1.0,0.04177164976960501,1.0,0.04643193125479554,1.0
+PA2,eda,EDA/GSR,eda_scl_delta,0.06613755587206618,1.0,1.0,0.8,1.0,True,,12.0,False,1.0,-0.0036012624382319087,0.2,0.0036402849538339,0.6
+PA2,eda,EDA/GSR,eda__tsfresh_kurtosis,0.031388315541500025,8.0,-1.0,0.8,4.0,True,,2.0,True,1.0,-0.0036012624382319087,0.2,0.0036402849538339,0.6
+PA2,eda,EDA/GSR,eda_scl_min,0.03063592763519704,9.0,-1.0,0.4,42.0,False,,23.0,False,1.0,-0.0036012624382319087,0.2,0.0036402849538339,0.6
+PA3,eda,EDA/GSR,eda_scl_delta,0.28040727172206514,1.0,1.0,1.0,1.0,True,,3.0,True,1.0,0.03339406952839347,1.0,-0.007867638438956992,0.4
+PA3,eda,EDA/GSR,eda__tsfresh_skewness,0.11238922444181576,2.0,1.0,1.0,3.0,True,,15.0,False,1.0,0.03339406952839347,1.0,-0.007867638438956992,0.4
+PA3,eda,EDA/GSR,eda__tsfresh_kurtosis,0.0411411202821166,3.0,1.0,0.8,4.0,True,,4.0,True,1.0,0.03339406952839347,1.0,-0.007867638438956992,0.4
+PA4,eda,EDA/GSR,eda_scl_delta,0.6106466900439058,1.0,1.0,1.0,1.0,True,,1.0,True,1.0,0.012595161839929148,0.8,0.032693906542777554,1.0
+PA4,eda,EDA/GSR,eda__tsfresh_skewness,0.18888277752971253,2.0,1.0,1.0,3.0,True,,7.0,True,1.0,0.012595161839929148,0.8,0.032693906542777554,1.0
+PA4,eda,EDA/GSR,eda_scl_slope_per_s,0.11495841834846905,4.0,1.0,1.0,2.0,True,,14.0,False,1.0,0.012595161839929148,0.8,0.032693906542777554,1.0
+PA1,emg,Trapezius EMG,emg_trapezius__tsfresh_linear_trend_slope,0.041817586018988065,6.0,-1.0,0.6,16.0,False,,49.0,False,1.0,0.011783568064774269,1.0,-0.000996235648253896,0.4
+PA1,emg,Trapezius EMG,emg_trapezius__tsfresh_kurtosis,0.03376333019734686,8.0,1.0,0.6,23.0,False,,54.0,False,-1.0,0.011783568064774269,1.0,-0.000996235648253896,0.4
+PA1,emg,Trapezius EMG,emg_trapezius__tsfresh_maximum,0.031070292686636285,10.0,-1.0,0.6,35.0,False,,38.0,False,-1.0,0.011783568064774269,1.0,-0.000996235648253896,0.4
+BL1,ecg,ECG,ecg_rate_slope_bpm_per_s,0.05504758327065175,4.0,1.0,1.0,5.0,True,,44.0,False,-1.0,-7.941583869202074e-05,0.4,0.002427114724164847,0.4
+BL1,ecg,ECG,ecg__tsfresh_minimum,0.025229281354848115,9.0,1.0,0.2,14.0,False,,22.0,False,-1.0,-7.941583869202074e-05,0.4,0.002427114724164847,0.4
+BL1,ecg,ECG,ecg_quality_mean,0.023197660358008503,11.0,1.0,0.2,11.0,False,,49.0,False,1.0,-7.941583869202074e-05,0.4,0.002427114724164847,0.4
