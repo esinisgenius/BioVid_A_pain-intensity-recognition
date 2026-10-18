@@ -1,0 +1,6 @@
+outer_fold,network_config,final_epochs_all_neural_models,selected_lambda,lambda_tuning_median_best_epoch
+1,h32_d0.1,40,0.1,36
+2,h32_d0.1,23,1.0,44
+3,h32_d0.1,37,0.01,49
+4,h64x32_d0.15,27,0.1,27
+5,h32_d0.1,23,1.0,50
