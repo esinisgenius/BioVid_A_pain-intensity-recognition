@@ -1,0 +1,11 @@
+task,representation,model,feature_set,n_features,macro_f1,balanced_accuracy,negative_class,positive_class,roc_auc,f1,accuracy,n_eval
+5class,raw,logistic_regression,combined_unique,59.0,0.30353553006772094,0.334367816091954,,,,,,
+5class,baseline_subtracted,logistic_regression,combined_unique,59.0,0.2955230403138491,0.32655172413793104,,,,,,
+PA1_vs_PA2,raw,logistic_regression,combined_unique,,,0.5468390804597701,PA1,PA2,0.5612267142290923,0.5045554508325479,0.5468390804597701,3480.0
+PA2_vs_PA3,raw,logistic_regression,combined_unique,,,0.5672413793103448,PA2,PA3,0.5940428061831153,0.5458383594692401,0.5672413793103448,3480.0
+PA1_vs_PA3,raw,logistic_regression,combined_unique,,,0.6336206896551724,PA1,PA3,0.677352028008984,0.6001881467544685,0.6336206896551724,3480.0
+BL1_vs_PA4,raw,logistic_regression,combined_unique,,,0.8080459770114943,BL1,PA4,0.8809050072664818,0.7973300970873787,0.8080459770114943,3480.0
+PA1_vs_PA2,baseline_subtracted,logistic_regression,combined_unique,,,0.5405172413793103,PA1,PA2,0.5568707887435592,0.4909264565425024,0.5405172413793103,3480.0
+PA2_vs_PA3,baseline_subtracted,logistic_regression,combined_unique,,,0.5729885057471265,PA2,PA3,0.5917766547760602,0.5379353233830846,0.5729885057471265,3480.0
+PA1_vs_PA3,baseline_subtracted,logistic_regression,combined_unique,,,0.6270114942528735,PA1,PA3,0.6718717796274276,0.5855683269476373,0.6270114942528736,3480.0
+BL1_vs_PA4,baseline_subtracted,logistic_regression,combined_unique,,,0.8057471264367817,BL1,PA4,0.8631609195402297,0.7874213836477988,0.8057471264367816,3480.0

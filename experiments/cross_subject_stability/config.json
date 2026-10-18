@@ -1,0 +1,25 @@
+{
+  "run_date_utc": "2026-10-09T03:36:27.409168+00:00",
+  "random_state": 42,
+  "feature_set": "combined_unique",
+  "model": "logistic_regression",
+  "selected_features": [
+    "eda_scl_delta",
+    "eda_scl_slope_per_s",
+    "eda_scr_amplitude_sum",
+    "eda_scr_count",
+    "emg_trapezius__tsfresh_linear_trend_slope"
+  ],
+  "n_subjects": 87,
+  "n_samples": 8700,
+  "trajectory_subjects": 87,
+  "n_folds": 5,
+  "calibration_repeats": 20,
+  "fixed_inputs": {
+    "feature_table": "artifacts/feature_table_filtered.csv",
+    "fold_assignments": "experiments/baselines/fold_assignments.csv",
+    "phase4": "experiments/modality_contribution/",
+    "phase5": "experiments/feature_contribution/",
+    "phase5_5": "experiments/adjacent_class_analysis/"
+  }
+}
