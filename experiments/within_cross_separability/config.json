@@ -1,0 +1,67 @@
+{
+  "phase": 8,
+  "analysis_name": "within_cross_separability",
+  "run_date_utc": "2026-10-18T09:50:14.438892+00:00",
+  "random_state": 20260909,
+  "feature_set": "phase6_preselected",
+  "features": [
+    "eda_scl_delta",
+    "eda_scl_slope_per_s",
+    "eda_scr_amplitude_sum",
+    "eda_scr_count",
+    "emg_trapezius__tsfresh_linear_trend_slope"
+  ],
+  "pain_pairs": [
+    "PA1_vs_PA2",
+    "PA2_vs_PA3",
+    "PA3_vs_PA4",
+    "PA1_vs_PA3",
+    "BL1_vs_PA4"
+  ],
+  "n_subjects": 87,
+  "n_trials": 8700,
+  "within_subject_cv": {
+    "protocol": "RepeatedStratifiedKFold",
+    "n_splits": 5,
+    "n_repeats": 10
+  },
+  "cross_subject_cv": {
+    "protocol": "reused Phase 3 StratifiedGroupKFold",
+    "n_folds": 5,
+    "fold_assignments": "experiments/baselines/fold_assignments.csv"
+  },
+  "model": {
+    "name": "logistic_regression",
+    "penalty": "l2",
+    "C": 1.0,
+    "max_iter": 3000
+  },
+  "preprocessing": [
+    "SimpleImputer(strategy=median)",
+    "StandardScaler()"
+  ],
+  "bootstrap_resamples": 2000,
+  "inputs": {
+    "feature_table": {
+      "path": "artifacts/feature_table_filtered.csv",
+      "sha256": "52596fa7fbdd8f4c2a1ee9f6eb9277a36cfc6b7cdba2a0bf89780d7a6b044444"
+    },
+    "phase3_fold_assignments": {
+      "path": "experiments/baselines/fold_assignments.csv",
+      "sha256": "d01b58e80bb8c8cfb36e6c43a02c2b33d19525c9fcc9e41d44407f60af8510a3"
+    },
+    "phase6_subject_consistency": {
+      "path": "experiments/cross_subject_stability/subject_feature_monotonicity.csv",
+      "sha256": "ff1da111afd7fa507de616e1d5c17149f5e6c6d5e17faf4d14f4f34e88b1d023"
+    }
+  },
+  "dependencies": {
+    "python": "3.13.5",
+    "numpy": "2.4.4",
+    "pandas": "2.3.3",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.8.0",
+    "matplotlib": "3.10.8"
+  },
+  "command": "/opt/anaconda3/bin/python -m src.models.run_within_cross_separability --root . --output-dir experiments/within_cross_separability"
+}
