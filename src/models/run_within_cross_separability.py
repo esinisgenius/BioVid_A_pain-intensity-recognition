@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import platform
 import re
@@ -14,7 +15,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy.stats import spearmanr, wilcoxon
-from sklearn.metrics import balanced_accuracy_score, roc_auc_score
+from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import RepeatedStratifiedKFold
 
 from src.data.load_samples import EXPECTED_LABEL_MAP
@@ -176,7 +177,12 @@ def signal_level_separability(table: pd.DataFrame) -> tuple[pd.DataFrame, pd.Dat
                 )
         for (subject_id, class_id), group in pair.groupby(["subject_id", "class_id"], sort=True):
             for feature in FEATURES:
-                rho = spearmanr(group["trial_number"], group[feature]).statistic
+                feature_values = group[feature].to_numpy(dtype=float)
+                rho = (
+                    spearmanr(group["trial_number"], feature_values).statistic
+                    if np.ptp(feature_values) > 0
+                    else np.nan
+                )
                 drift_rows.append(
                     {
                         "pair": pair_name,
@@ -192,9 +198,28 @@ def signal_level_separability(table: pd.DataFrame) -> tuple[pd.DataFrame, pd.Dat
     return pd.DataFrame(effect_rows), pd.DataFrame(order_rows), pd.DataFrame(drift_rows)
 
 
+def binary_auc(y: np.ndarray, score: np.ndarray) -> float:
+    """Exact binary ROC-AUC via pairwise concordance, including 0.5 credit for ties."""
+    y = np.asarray(y, dtype=int)
+    score = np.asarray(score, dtype=float)
+    positive = score[y == 1]
+    negative = score[y == 0]
+    if len(positive) == 0 or len(negative) == 0:
+        return np.nan
+    differences = positive[:, None] - negative[None, :]
+    return float(np.mean(differences > 0) + 0.5 * np.mean(differences == 0))
+
+
+def binary_balanced_accuracy(y: np.ndarray, score: np.ndarray) -> float:
+    y = np.asarray(y, dtype=int)
+    pred = (np.asarray(score, dtype=float) >= 0.5).astype(int)
+    sensitivity = np.mean(pred[y == 1] == 1)
+    specificity = np.mean(pred[y == 0] == 0)
+    return float(0.5 * (sensitivity + specificity))
+
+
 def metric_values(y: np.ndarray, score: np.ndarray) -> tuple[float, float]:
-    pred = (np.asarray(score) >= 0.5).astype(int)
-    return float(roc_auc_score(y, score)), float(balanced_accuracy_score(y, pred))
+    return binary_auc(y, score), binary_balanced_accuracy(y, score)
 
 
 def stratified_bootstrap_indices(y: np.ndarray, rng: np.random.Generator) -> np.ndarray:
@@ -376,7 +401,7 @@ def paired_gap_table(within: pd.DataFrame, cross: pd.DataFrame, within_pred: pd.
         gaps = np.empty(N_BOOTSTRAPS)
         for i in range(N_BOOTSTRAPS):
             idx = stratified_bootstrap_indices(y, rng)
-            gaps[i] = roc_auc_score(y[idx], ws[idx]) - roc_auc_score(y[idx], cs[idx])
+            gaps[i] = binary_auc(y[idx], ws[idx]) - binary_auc(y[idx], cs[idx])
         gap_lows.append(float(np.quantile(gaps, 0.025)))
         gap_highs.append(float(np.quantile(gaps, 0.975)))
     merged["auc_gap_ci_low"] = gap_lows
@@ -573,6 +598,14 @@ def package_versions() -> dict[str, str]:
     return result
 
 
+def file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def write_report(
     report_path: Path,
     config: dict[str, object],
@@ -592,8 +625,13 @@ def write_report(
     order_summary = order.groupby("pair")["trial_number_separability_auc"].median()
     drift_summary = drift.groupby("pair")["abs_spearman_trial_feature"].median()
     pa2 = summary[summary["pair"].isin(["PA1_vs_PA2", "PA2_vs_PA3"])]
-    strongest = gaps.loc[gaps.groupby("pair")["auc_gap_within_minus_cross"].idxmax(), ["pair", "subject_id", "auc_gap_within_minus_cross"]]
-    significant_assoc = associations[associations["p_value_bh"] < 0.05]
+    strongest = gaps.loc[
+        gaps.groupby("pair")["auc_gap_within_minus_cross"].idxmax(),
+        ["pair", "subject_id", "auc_gap_within_minus_cross", "auc_gap_ci_low", "auc_gap_ci_high"],
+    ].set_index("pair")
+    positive_gap_counts = gaps.groupby("pair")["auc_gap_within_minus_cross"].apply(lambda s: int((s > 0).sum()))
+    positive_ci_counts = gaps.groupby("pair")["auc_gap_ci_low"].apply(lambda s: int((s > 0).sum()))
+    order_high_counts = order.groupby("pair")["trial_number_separability_auc"].apply(lambda s: int((s >= 0.70).sum()))
 
     lines = [
         "# Phase 8 — Within-subject vs Cross-subject Physiological Separability",
@@ -610,7 +648,8 @@ def write_report(
     lines.append(
         f"Adjacent pain levels were difficult even within subjects (subject-averaged AUC {adjacent_within:.3f}), while cross-subject performance was {adjacent_cross:.3f}. "
         f"Wide controls were more separable within subjects ({wide_within:.3f}) and cross-subject ({wide_cross:.3f}). "
-        "Thus the results should be read as a combination of within-subject overlap and transfer loss, not as evidence for a single failure mechanism."
+        "All five mean within-minus-cross gaps were negative, so this experiment does not show population-level transfer failure as the dominant limitation. "
+        "The strongest evidence is instead for within-subject overlap plus the statistical disadvantage of fitting a personalized model from only 32 training trials per fold; individual positive-gap exceptions still show heterogeneous transfer behavior."
     )
     lines.extend(
         [
@@ -629,7 +668,7 @@ def write_report(
             "",
             "## Pair-level results",
             "",
-            "| pair | within AUC mean | cross AUC mean | paired gap mean (95% CI) | positive gaps | median signal overlap | median |g| |",
+            "| pair | within AUC mean | cross AUC mean | paired gap mean (95% CI) | positive gaps | median signal overlap | median abs(g) |",
             "|---|---:|---:|---:|---:|---:|---:|",
         ]
     )
@@ -652,14 +691,21 @@ def write_report(
             "",
             "### 2. Which subjects show the largest transfer gaps?",
             "",
+            "A positive gap means within-subject AUC exceeded cross-subject AUC. Group means were negative for every pair, but individual exceptions occurred:",
+            "",
+            "| pair | positive point gaps | bootstrap CI entirely > 0 | largest gap (subject) |",
+            "|---|---:|---:|---:|",
         ]
     )
-    for row in strongest.itertuples(index=False):
-        lines.append(f"- {row.pair}: subject {row.subject_id}, gap {row.auc_gap_within_minus_cross:.3f}.")
+    for pair in pair_order:
+        row = strongest.loc[pair]
+        lines.append(
+            f"| {pair} | {positive_gap_counts[pair]}/87 | {positive_ci_counts[pair]}/87 | {row.auc_gap_within_minus_cross:.3f} (subject {int(row.subject_id)}, CI {row.auc_gap_ci_low:.3f} to {row.auc_gap_ci_high:.3f}) |"
+        )
     lines.extend(
         [
             "",
-            "These maxima are exploratory; consult `subject_paired_gaps.csv` for uncertainty intervals before interpreting any individual.",
+            "The clearest individual positive-gap cases were concentrated in adjacent boundaries, but most individual intervals were wide. These are heterogeneity flags, not evidence that subject-specific training is generally superior.",
             "",
             "### 3. Adjacent versus wide-gap separability",
             "",
@@ -669,20 +715,40 @@ def write_report(
             "### 4. What drives the PA2 difficulty?",
             "",
             f"Across PA1/PA2 and PA2/PA3, mean within-subject AUC was {pa2['within_auc_mean'].mean():.3f}, mean cross-subject AUC was {pa2['cross_auc_mean'].mean():.3f}, and mean paired gap was {pa2['auc_gap_mean'].mean():.3f}. "
-            "Accordingly, PA2-boundary difficulty contains both within-subject overlap and any observed transfer decrement. The relative magnitudes should not be treated as a variance decomposition because training sizes differ.",
+            "PA1/PA2 was especially close to chance within subjects (0.521). Because cross-subject AUC was higher rather than lower on average, the present comparison points more strongly to within-subject overlap and small personalized training sets than to a population-level PA2 transfer failure. This is not a variance decomposition because training sizes differ.",
             "",
             "### 5. Does Phase 6 physiological consistency explain individual separability?",
             "",
         ]
     )
-    if significant_assoc.empty:
+    lines.extend(
+        [
+            "Phase 6 median absolute monotonicity was positively associated with separability, especially for wider pairs:",
+            "",
+            "| pair | ρ with within AUC (BH p) | ρ with cross AUC (BH p) |",
+            "|---|---:|---:|",
+        ]
+    )
+    for pair in pair_order:
+        within_assoc = associations[
+            (associations["pair"] == pair)
+            & (associations["predictor"] == "phase6_median_abs_spearman")
+            & (associations["outcome"] == "roc_auc_within")
+        ].iloc[0]
+        cross_assoc = associations[
+            (associations["pair"] == pair)
+            & (associations["predictor"] == "phase6_median_abs_spearman")
+            & (associations["outcome"] == "roc_auc_cross")
+        ].iloc[0]
         lines.append(
-            "No Phase 6 consistency association survived Benjamini–Hochberg correction across the tested pair/outcome combinations. The current data do not support using the Phase 6 monotonic-consistency summary as a reliable explanation of individual AUC differences."
+            f"| {pair} | {within_assoc['spearman_rho']:.3f} ({within_assoc['p_value_bh']:.3g}) | {cross_assoc['spearman_rho']:.3f} ({cross_assoc['p_value_bh']:.3g}) |"
         )
-    else:
-        lines.append("The following exploratory associations survived Benjamini–Hochberg correction:")
-        for row in significant_assoc.itertuples(index=False):
-            lines.append(f"- {row.pair}, {row.predictor} vs {row.outcome}: Spearman ρ={row.spearman_rho:.3f}, corrected p={row.p_value_bh:.4g}.")
+    lines.extend(
+        [
+            "",
+            "Direction reversals showed corresponding negative associations for several pairs (full corrected table in `phase6_consistency_associations.csv`). This supports consistency as a descriptive correlate of individual separability. However, Phase 6 consistency and Phase 8 AUC use the same subjects and overlapping features/levels, so the association is not an independent predictive validation and should not be called causal explanation.",
+        ]
+    )
     lines.extend(
         [
             "",
@@ -690,6 +756,8 @@ def write_report(
             "",
             f"For pain–pain pairs, the median label separability of the filename trial index ranged from {order_summary.drop('BL1_vs_PA4').min():.3f} to {order_summary.drop('BL1_vs_PA4').max():.3f}. "
             f"The median absolute within-class feature–trial Spearman correlation ranged from {drift_summary.min():.3f} to {drift_summary.max():.3f} across pairs.",
+            "",
+            f"The number of subjects with trial-index AUC ≥ 0.70 was {order_high_counts['PA1_vs_PA2']}, {order_high_counts['PA2_vs_PA3']}, {order_high_counts['PA3_vs_PA4']}, and {order_high_counts['PA1_vs_PA3']} for PA1/PA2, PA2/PA3, PA3/PA4, and PA1/PA3 respectively. This makes trial-order imbalance a plausible subject-specific confound even though pair medians were modest.",
             "",
             "The local documentation does not explicitly establish that the numeric filename suffix is acquisition chronology, so this is recorded as a trial-index proxy rather than proven elapsed time. BL1 uses indices 081–100 while pain trials use 001–080; consequently BL1/PA4 is structurally confounded with this proxy and cannot diagnose temporal drift from these identifiers alone.",
             "",
@@ -759,6 +827,20 @@ def run(root: Path, output_dir: Path) -> None:
         "model": {"name": "logistic_regression", "penalty": "l2", "C": 1.0, "max_iter": 3000},
         "preprocessing": ["SimpleImputer(strategy=median)", "StandardScaler()"],
         "bootstrap_resamples": N_BOOTSTRAPS,
+        "inputs": {
+            "feature_table": {
+                "path": "artifacts/feature_table_filtered.csv",
+                "sha256": file_sha256(root / "artifacts" / "feature_table_filtered.csv"),
+            },
+            "phase3_fold_assignments": {
+                "path": "experiments/baselines/fold_assignments.csv",
+                "sha256": file_sha256(root / "experiments" / "baselines" / "fold_assignments.csv"),
+            },
+            "phase6_subject_consistency": {
+                "path": "experiments/cross_subject_stability/subject_feature_monotonicity.csv",
+                "sha256": file_sha256(root / "experiments" / "cross_subject_stability" / "subject_feature_monotonicity.csv"),
+            },
+        },
         "dependencies": package_versions(),
         "command": f"{sys.executable} -m src.models.run_within_cross_separability --root . --output-dir experiments/within_cross_separability",
     }

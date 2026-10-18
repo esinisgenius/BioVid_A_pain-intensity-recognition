@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+from sklearn.metrics import balanced_accuracy_score, roc_auc_score
 
 import src.models.run_within_cross_separability as phase8
 
@@ -67,6 +68,14 @@ def test_effect_size_and_overlap_have_expected_limits() -> None:
     assert phase8.empirical_overlap(low, low) == 1.0
 
 
+def test_fast_binary_metrics_match_sklearn_with_ties() -> None:
+    y = np.asarray([0, 0, 0, 1, 1, 1])
+    score = np.asarray([0.1, 0.5, 0.8, 0.5, 0.7, 0.9])
+    assert phase8.binary_auc(y, score) == roc_auc_score(y, score)
+    pred = (score >= 0.5).astype(int)
+    assert phase8.binary_balanced_accuracy(y, score) == balanced_accuracy_score(y, pred)
+
+
 def test_within_subject_predictions_are_oof_and_deterministic(monkeypatch) -> None:
     table = synthetic_table(2)
     monkeypatch.setattr(phase8, "N_REPEATS", 2)
@@ -106,4 +115,3 @@ def test_benjamini_hochberg_is_monotone_in_rank() -> None:
     ordered = pd.DataFrame({"raw": raw, "adjusted": adjusted}).sort_values("raw")
     assert np.all(np.diff(ordered["adjusted"]) >= -1e-12)
     assert ((adjusted >= raw) & (adjusted <= 1)).all()
-
