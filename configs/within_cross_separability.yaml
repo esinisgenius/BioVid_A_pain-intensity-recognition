@@ -1,0 +1,35 @@
+phase: 8
+analysis_name: within_cross_separability
+random_state: 20260909
+feature_set: phase6_preselected
+features:
+  - eda_scl_delta
+  - eda_scl_slope_per_s
+  - eda_scr_amplitude_sum
+  - eda_scr_count
+  - emg_trapezius__tsfresh_linear_trend_slope
+pain_pairs:
+  - [PA1, PA2]
+  - [PA2, PA3]
+  - [PA3, PA4]
+  - [PA1, PA3]
+  - [BL1, PA4]
+model:
+  name: logistic_regression
+  penalty: l2
+  C: 1.0
+  max_iter: 3000
+  preprocessing:
+    - median_imputation
+    - standard_scaling
+within_subject_cv:
+  protocol: RepeatedStratifiedKFold
+  n_splits: 5
+  n_repeats: 10
+cross_subject_cv:
+  protocol: reuse_phase3_StratifiedGroupKFold
+  fold_assignments: experiments/baselines/fold_assignments.csv
+bootstrap:
+  n_resamples: 2000
+  confidence_level: 0.95
+
