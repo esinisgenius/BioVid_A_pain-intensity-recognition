@@ -20,6 +20,8 @@ artifacts/feature_table_filtered.parquet
 artifacts/feature_table_filtered.csv
 artifacts/feature_table_filtered_all_candidates.parquet
 experiments/**/filtered_signal_tensor_*.npz
+artifacts/thiam2021_signal_cache/
+experiments/thiam2021_smoke/*.pt
 
 # Python
 __pycache__/
