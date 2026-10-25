@@ -1,0 +1,36 @@
+task: "Phase 10: prediction reliability, uncertainty, and ordinal prediction intervals"
+inputs:
+  feature_table: artifacts/feature_table_filtered.csv
+  feature_metadata: artifacts/feature_metadata.json
+  fold_assignments: experiments/baselines/fold_assignments.csv
+feature_set: combined_unique
+model:
+  name: xgboost
+  role: "Population-only five-class model with the fixed Phase 3 strengthening configuration"
+split:
+  reuse_phase3_outer_folds: true
+  calibration_subject_fraction: 0.25
+  group_column: subject_id
+  random_state: 20260909
+calibration:
+  method: temperature_scaling
+  temperature_bounds: [0.05, 10.0]
+  ece_bins: 15
+selective_prediction:
+  coverage_grid: [0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 1.00]
+  uncertainty_scores:
+    - max_probability
+    - predictive_entropy
+  random_repetitions: 200
+conformal:
+  alpha_levels: [0.05, 0.10, 0.20]
+  primary_alpha_levels: [0.05, 0.10]
+  standard_score: one_minus_true_class_probability
+  ordinal_score: absolute_true_level_minus_expected_level
+bootstrap:
+  unit: subject
+  repetitions: 1000
+  confidence_level: 0.95
+outputs:
+  directory: experiments/prediction_reliability
+  report: reports/prediction_reliability.md
