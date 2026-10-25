@@ -46,6 +46,16 @@ def test_signal_preprocessing_produces_three_finite_paper_length_inputs() -> Non
         assert np.isfinite(signal).all()
 
 
+def test_real_raw_signal_schema_uses_expected_tab_delimited_columns() -> None:
+    samples = pd.read_csv(ROOT / "starting_point" / "samples.csv", sep="\t")
+    row = samples.sort_values("sample_id").iloc[0]
+    path = ROOT / "biosignals_raw" / row["subject_name"] / f"{row['sample_name']}_bio.csv"
+    frame = pd.read_csv(path, sep="\t", nrows=2)
+    assert ["gsr", "ecg", "emg_trapezius"] == [
+        column for column in frame.columns if column in {"gsr", "ecg", "emg_trapezius"}
+    ]
+
+
 def test_model_output_reconstruction_and_probability_shapes_are_valid() -> None:
     torch.manual_seed(1)
     model = ThiamSupervisedDDCAE(CONFIG)

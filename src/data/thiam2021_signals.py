@@ -100,7 +100,7 @@ def build_signal_cache(root: Path, samples: pd.DataFrame, config: dict, force: b
         source_digest.update(str(relative).encode("utf-8"))
         source_digest.update(b"\0")
         source_digest.update(raw)
-        frame = pd.read_csv(io.BytesIO(raw), usecols=list(MODALITY_COLUMNS.values()))
+        frame = pd.read_csv(io.BytesIO(raw), sep="\t", usecols=list(MODALITY_COLUMNS.values()))
         processed = preprocess_trial(frame, config)
         for modality in arrays:
             arrays[modality][idx] = processed[modality]
