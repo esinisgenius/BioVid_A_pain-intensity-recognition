@@ -446,7 +446,8 @@ def phase6_gain_associations(root: Path, subject_gains: pd.DataFrame, config: di
     rows = []
     for (pair, k), group in linked.groupby(["pair", "k_per_class"], sort=False):
         for predictor in ("phase6_median_abs_spearman", "phase6_sign_reversal_rate"):
-            result = spearmanr(group[predictor], group["adaptation_gain_auc"])
+            complete = group[[predictor, "adaptation_gain_auc"]].dropna()
+            result = spearmanr(complete[predictor], complete["adaptation_gain_auc"])
             rows.append(
                 {
                     "pair": pair,
@@ -455,7 +456,7 @@ def phase6_gain_associations(root: Path, subject_gains: pd.DataFrame, config: di
                     "outcome": "adaptation_gain_auc",
                     "spearman_rho": float(result.statistic),
                     "p_value": float(result.pvalue),
-                    "n_subjects": len(group),
+                    "n_subjects": len(complete),
                     "interpretation": "exploratory_nonindependent_same_cohort",
                 }
             )
@@ -577,7 +578,7 @@ def run(root: Path, config_path: Path, output_dir: Path) -> None:
     rates = improvement_rates(subject_gains)
     linked, associations = phase6_gain_associations(root, subject_gains, config)
 
-    predictions.to_csv(output_dir / "trial_predictions.csv", index=False)
+    predictions.to_csv(output_dir / "trial_predictions.csv.gz", index=False, compression="gzip")
     metrics.to_csv(output_dir / "subject_repeat_metrics.csv", index=False)
     split_manifest.to_csv(output_dir / "adaptation_split_manifest.csv", index=False)
     gains.to_csv(output_dir / "paired_method_comparisons.csv", index=False)
