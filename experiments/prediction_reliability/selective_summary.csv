@@ -1,0 +1,3 @@
+method,aurc,error_detection_auroc
+max_probability,0.5644737189428538,0.6207171224732462
+predictive_entropy,0.5648330927059004,0.6226947681331747

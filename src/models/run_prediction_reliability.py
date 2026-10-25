@@ -6,6 +6,7 @@ import importlib.metadata
 import json
 import math
 import platform
+import shlex
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -262,6 +263,7 @@ def build_fold_predictions(
         temperature = fit_temperature(calibration_raw, y[calibration_index], temperature_bounds)
         calibration_scaled = apply_temperature(calibration_raw, temperature)
         test_scaled = apply_temperature(test_raw, temperature)
+        prediction = test_scaled.argmax(axis=1)
         calibration_expected = calibration_scaled @ CLASS_IDS.astype(float)
         standard_scores = 1.0 - calibration_scaled[np.arange(len(calibration_index)), y[calibration_index]]
         ordinal_scores = np.abs(y[calibration_index].astype(float) - calibration_expected)
@@ -293,6 +295,7 @@ def build_fold_predictions(
                             "sample_name": table.iloc[idx]["sample_name"],
                             "subject_id": int(table.iloc[idx]["subject_id"]),
                             "true_class_id": int(y[idx]),
+                            "pred_class_id": int(prediction[pos]),
                             "alpha": alpha,
                             "class_id": class_id,
                             "class_name": class_name,
@@ -303,7 +306,6 @@ def build_fold_predictions(
                         }
                     )
 
-        prediction = test_scaled.argmax(axis=1)
         for pos, idx in enumerate(test_index):
             row = {
                 "record_type": "prediction",
@@ -447,6 +449,9 @@ def conformal_outputs(conformal_long: pd.DataFrame) -> tuple[pd.DataFrame, pd.Da
         upper = int(group["ordinal_upper"].iloc[0])
         standard_ids = CLASS_IDS[standard_members]
         standard_contiguous = bool(len(standard_ids) <= 1 or np.all(np.diff(standard_ids) == 1))
+        pred_class_id = int(group["pred_class_id"].iloc[0])
+        point_error_distance = abs(pred_class_id - int(true_class_id))
+        point_error_type = "correct" if point_error_distance == 0 else ("adjacent_error" if point_error_distance == 1 else "severe_error")
         for method, covered, width, singleton, contiguous in [
             ("standard_classification", bool(standard_members[int(true_class_id)]), int(standard_members.sum()), int(standard_members.sum()) == 1, standard_contiguous),
             ("ordinal_contiguous", lower <= int(true_class_id) <= upper, upper - lower + 1, lower == upper, True),
@@ -459,6 +464,9 @@ def conformal_outputs(conformal_long: pd.DataFrame) -> tuple[pd.DataFrame, pd.Da
                     "subject_id": int(subject_id),
                     "true_class_id": int(true_class_id),
                     "true_class_name": EXPECTED_LABEL_MAP[int(true_class_id)],
+                    "pred_class_id": pred_class_id,
+                    "point_error_distance": point_error_distance,
+                    "point_error_type": point_error_type,
                     "alpha": float(alpha),
                     "nominal_coverage": 1.0 - float(alpha),
                     "method": method,
@@ -499,6 +507,8 @@ def _conformal_groups(samples: pd.DataFrame):
             yield (method, alpha, "pain_level", value), group
         for value, group in base.groupby("subject_id", sort=True):
             yield (method, alpha, "subject", int(value)), group
+        for value, group in base.groupby("point_error_type", sort=False):
+            yield (method, alpha, "point_error_type", value), group
 
 
 def uncertainty_outputs(predictions: pd.DataFrame) -> pd.DataFrame:
@@ -542,8 +552,15 @@ def bootstrap_outputs(
         ]:
             ci = subject_cluster_bootstrap(predictions, function, repetitions, seed, confidence_level)
             rows.append({"analysis": "calibration", "method": probability_type, "metric": metric_name, **ci})
-    y = predictions["true_class_id"].to_numpy(int)
-    pred = predictions["pred_class_id"].to_numpy(int)
+    calibration_metric_functions = {
+        "ece": lambda d, p: ece_score(d["true_class_id"].to_numpy(int), _probabilities(d, p), n_bins),
+        "brier": lambda d, p: multiclass_brier(d["true_class_id"].to_numpy(int), _probabilities(d, p)),
+        "nll": lambda d, p: float(log_loss(d["true_class_id"].to_numpy(int), _probabilities(d, p), labels=CLASS_IDS)),
+    }
+    for metric_name, metric_function in calibration_metric_functions.items():
+        improvement = lambda d, f=metric_function: float(f(d, "raw") - f(d, "calibrated"))
+        ci = subject_cluster_bootstrap(predictions, improvement, repetitions, seed + 3, confidence_level)
+        rows.append({"analysis": "calibration_delta", "method": "temperature_scaling", "metric": f"{metric_name}_improvement", **ci})
     probabilities = _probabilities(predictions, "calibrated")
     predictions = predictions.copy()
     predictions["uncertainty_max_probability"] = 1.0 - probabilities.max(axis=1)
@@ -554,7 +571,14 @@ def bootstrap_outputs(
         )
         ci = subject_cluster_bootstrap(predictions, function, repetitions, seed + 1, confidence_level)
         rows.append({"analysis": "selective_prediction", "method": method, "metric": "aurc", **ci})
-    del y, pred
+        detection = lambda d, m=method: float(
+            roc_auc_score(
+                d["pred_class_id"].to_numpy(int) != d["true_class_id"].to_numpy(int),
+                d[f"uncertainty_{m}"].to_numpy(float),
+            )
+        )
+        ci = subject_cluster_bootstrap(predictions, detection, repetitions, seed + 4, confidence_level)
+        rows.append({"analysis": "selective_prediction", "method": method, "metric": "error_detection_auroc", **ci})
     for (method, alpha), frame in conformal_samples.groupby(["method", "alpha"], sort=True):
         for metric_name, function in [
             ("empirical_coverage", lambda d: float(d["covered"].mean())),
@@ -625,6 +649,19 @@ def plot_outputs(
     fig.savefig(figure_dir / "uncertainty_by_pain_level.png", dpi=180)
     plt.close(fig)
 
+    subjects = uncertainty[uncertainty["group_type"] == "subject"].sort_values("mean_predictive_entropy")
+    fig, ax = plt.subplots(figsize=(12, 4))
+    ax.bar(np.arange(len(subjects)), subjects["mean_predictive_entropy"])
+    ax.set(
+        xlabel="Subjects (ordered by mean entropy)",
+        ylabel="Mean normalized entropy",
+        title="Cross-subject uncertainty heterogeneity",
+    )
+    ax.set_xticks([])
+    fig.tight_layout()
+    fig.savefig(figure_dir / "uncertainty_by_subject.png", dpi=180)
+    plt.close(fig)
+
     overall = conformal_summary[conformal_summary["group_type"] == "overall"]
     fig, ax = plt.subplots(figsize=(6.5, 5))
     for method, group in overall.groupby("method"):
@@ -636,6 +673,21 @@ def plot_outputs(
     ax.legend()
     fig.tight_layout()
     fig.savefig(figure_dir / "conformal_coverage_width.png", dpi=180)
+    plt.close(fig)
+
+    subject_coverage = conformal_summary[
+        (conformal_summary["group_type"] == "subject") & (np.isclose(conformal_summary["alpha"], 0.10))
+    ]
+    fig, ax = plt.subplots(figsize=(12, 4))
+    for method, group in subject_coverage.groupby("method"):
+        ordered = group.sort_values("group")
+        ax.plot(np.arange(len(ordered)), ordered["empirical_coverage"], marker=".", linewidth=1, label=method)
+    ax.axhline(0.90, linestyle="--", color="0.4", label="nominal 90%")
+    ax.set(xlabel="Subject", ylabel="Empirical coverage", title="Subject-level 90% coverage heterogeneity")
+    ax.set_xticks([])
+    ax.legend(fontsize=8)
+    fig.tight_layout()
+    fig.savefig(figure_dir / "conformal_coverage_by_subject.png", dpi=180)
     plt.close(fig)
 
 
@@ -657,6 +709,15 @@ def write_report(
 ) -> None:
     overall_cal = calibration[calibration["group_type"] == "overall"]
     conformal = conformal_summary[conformal_summary["group_type"] == "overall"]
+    conformal_subject_90 = conformal_summary[
+        (conformal_summary["group_type"] == "subject") & np.isclose(conformal_summary["alpha"], 0.10)
+    ]
+    conformal_class_90 = conformal_summary[
+        (conformal_summary["group_type"] == "pain_level") & np.isclose(conformal_summary["alpha"], 0.10)
+    ]
+    conformal_error_90 = conformal_summary[
+        (conformal_summary["group_type"] == "point_error_type") & np.isclose(conformal_summary["alpha"], 0.10)
+    ]
     agg_selective = selective.groupby(["method", "coverage_target"], as_index=False).agg(accuracy=("accuracy", "mean"), mae=("mae", "mean"), severe_error_rate=("severe_error_rate", "mean"))
     pain_uncertainty = uncertainty[uncertainty["group_type"] == "pain_level"]
     lines = [
@@ -686,10 +747,16 @@ def write_report(
     lines.extend(["", "Subject-clustered 95% confidence intervals:", "", "| probabilities | metric | estimate | 95% CI |", "|---|---|---:|---:|"])
     for _, row in bootstrap[bootstrap["analysis"] == "calibration"].iterrows():
         lines.append(f"| {row['method']} | {row['metric']} | {row['estimate']:.4f} | [{row['ci_low']:.4f}, {row['ci_high']:.4f}] |")
+    lines.extend(["", "Paired improvement (`raw - temperature-scaled`; positive favors scaling):", "", "| metric | improvement | subject-clustered 95% CI |", "|---|---:|---:|"])
+    for _, row in bootstrap[bootstrap["analysis"] == "calibration_delta"].iterrows():
+        lines.append(f"| {row['metric']} | {row['estimate']:.4f} | [{row['ci_low']:.4f}, {row['ci_high']:.4f}] |")
     temperatures = thresholds.groupby("fold")["temperature"].first()
     lines.extend(["", f"Fold temperatures ranged from {temperatures.min():.3f} to {temperatures.max():.3f} (median {temperatures.median():.3f}).", "", "Figures: `figures/reliability_diagram_overall.png` and `figures/reliability_diagrams_per_class.png`.", "", "## Uncertainty and selective prediction", "", "| uncertainty | AURC | error-detection AUROC |", "|---|---:|---:|"])
     for _, row in selective_summary.iterrows():
         lines.append(f"| {row['method']} | {row['aurc']:.4f} | {row['error_detection_auroc']:.4f} |")
+    lines.extend(["", "Subject-clustered uncertainty-ranking intervals:", "", "| uncertainty | metric | estimate | 95% CI |", "|---|---|---:|---:|"])
+    for _, row in bootstrap[bootstrap["analysis"] == "selective_prediction"].iterrows():
+        lines.append(f"| {row['method']} | {row['metric']} | {row['estimate']:.4f} | [{row['ci_low']:.4f}, {row['ci_high']:.4f}] |")
     lines.extend(["", "Mean fold performance at selected coverage levels:", "", "| method | coverage | accepted accuracy | MAE | severe error rate |", "|---|---:|---:|---:|---:|"])
     for _, row in agg_selective[agg_selective["coverage_target"].isin([0.5, 0.7, 0.9, 1.0])].iterrows():
         lines.append(f"| {row['method']} | {row['coverage_target']:.0%} | {row['accuracy']:.4f} | {row['mae']:.4f} | {row['severe_error_rate']:.4f} |")
@@ -698,11 +765,31 @@ def write_report(
         lines.append(f"| {row['group']} | {row['accuracy']:.4f} | {row['mean_max_probability']:.4f} | {row['mean_predictive_entropy']:.4f} |")
     lines.extend(["", "## Conformal prediction", "", "| method | target coverage | empirical coverage | mean width | median width | singleton rate | singleton error rate | contiguity |", "|---|---:|---:|---:|---:|---:|---:|---:|"])
     for _, row in conformal.iterrows():
-        lines.append(f"| {row['method']} | {row['nominal_coverage']:.0%} | {row['empirical_coverage']:.4f} | {row['mean_width']:.3f} | {row['median_width']:.1f} | {row['singleton_rate']:.4f} | {row['singleton_error_rate']:.4f} | {row['contiguous_rate']:.4f} |")
+        singleton_error = "—" if pd.isna(row["singleton_error_rate"]) else f"{row['singleton_error_rate']:.4f}"
+        lines.append(f"| {row['method']} | {row['nominal_coverage']:.0%} | {row['empirical_coverage']:.4f} | {row['mean_width']:.3f} | {row['median_width']:.1f} | {row['singleton_rate']:.4f} | {singleton_error} | {row['contiguous_rate']:.4f} |")
     lines.extend(
         [
             "",
             "The standard comparator is split conformal classification using nonconformity `1 - p(y)`. The ordinal comparator is a split-conformal residual interval around the probability-weighted expected level, using `|y - E[level]|`; it is a baseline construction, not a novel algorithm.",
+            "",
+            "### Coverage heterogeneity at 90% target",
+            "",
+            "| method | subject coverage min–median–max | subject mean-width range |",
+            "|---|---:|---:|",
+        ]
+    )
+    for method, group in conformal_subject_90.groupby("method"):
+        lines.append(
+            f"| {method} | {group['empirical_coverage'].min():.3f}–{group['empirical_coverage'].median():.3f}–{group['empirical_coverage'].max():.3f} | {group['mean_width'].min():.2f}–{group['mean_width'].max():.2f} |"
+        )
+    lines.extend(["", "| method | pain level | coverage | mean width |", "|---|---|---:|---:|"])
+    for _, row in conformal_class_90.iterrows():
+        lines.append(f"| {row['method']} | {row['group']} | {row['empirical_coverage']:.4f} | {row['mean_width']:.3f} |")
+    lines.extend(["", "### Interval containment versus point-error severity (90% target)", "", "| method | point prediction | n | interval/set contains truth | mean width |", "|---|---|---:|---:|---:|"])
+    for _, row in conformal_error_90.iterrows():
+        lines.append(f"| {row['method']} | {row['group']} | {int(row['n'])} | {row['empirical_coverage']:.4f} | {row['mean_width']:.3f} |")
+    lines.extend(
+        [
             "",
             "### Guarantee scope",
             "",
@@ -718,7 +805,9 @@ def write_report(
             "",
             "## Decision on boundary-aware selective resolution",
             "",
-            "Proceed only if uncertainty materially orders error risk beyond random rejection, while at least one conformal baseline exposes a practically important coverage-resolution or subject-heterogeneity gap. Otherwise, these standard baselines already answer the reliability question and further method complexity is not justified.",
+            "The feasibility gate is only partially met. Max-probability and entropy ranking clearly outperform random rejection, so the model has useful error-risk information. However, the gain is not sufficient for precise grading: at 50% coverage accepted accuracy is only about 41%, and the 90% conformal outputs require roughly 3.7 of five labels on average. The ordinal interval is contiguous, but it is not narrower than the standard set at matched coverage and has zero singleton predictions; it therefore adds interpretability of shape, not resolution.",
+            "",
+            "A narrowly scoped boundary-aware selective-resolution follow-up is scientifically justified because risk ranking exists while standard baselines leave a severe coverage-resolution and subject-heterogeneity gap. This is not yet justification for a complex new model or an innovation claim. Any follow-up should stop unless it improves resolution at matched subject-independent coverage without concentrating rejection or undercoverage in PA2, endpoint classes, or particular subjects.",
             "",
             "Machine-readable per-subject, per-class, fold-level, selective, and conformal diagnostics are stored beside this report in `experiments/prediction_reliability/`.",
             "",
@@ -787,6 +876,7 @@ def run(root: Path, config_path: Path, command: str) -> None:
     run_manifest = {
         "run_date_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "command": command,
+        "working_directory": str(root),
         "python": sys.version,
         "platform": platform.platform(),
         "dependencies": dependency_versions(),
@@ -812,7 +902,10 @@ def main() -> None:
     args = parser.parse_args()
     root = args.root.resolve()
     config_path = args.config if args.config.is_absolute() else root / args.config
-    command = f"{sys.executable} -m src.models.run_prediction_reliability --root {root} --config {config_path.relative_to(root)}"
+    command = (
+        f"{shlex.quote(sys.executable)} -m src.models.run_prediction_reliability "
+        f"--root {shlex.quote(str(root))} --config {shlex.quote(str(config_path.relative_to(root)))}"
+    )
     run(root, config_path, command)
 
 

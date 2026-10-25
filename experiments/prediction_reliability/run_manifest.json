@@ -1,0 +1,152 @@
+{
+  "run_date_utc": "2026-10-25T10:45:31Z",
+  "command": "/opt/anaconda3/bin/python -m src.models.run_prediction_reliability --root '/Users/liangyingxin/Desktop/BioVid_A ' --config configs/prediction_reliability.yaml",
+  "working_directory": "/Users/liangyingxin/Desktop/BioVid_A ",
+  "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 11:23:37) [Clang 14.0.6 ]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "dependencies": {
+    "numpy": "2.4.4",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.1",
+    "matplotlib": "3.10.8",
+    "PyYAML": "6.0.2",
+    "xgboost": "3.4.1"
+  },
+  "random_seed": 20260909,
+  "input_sha256": {
+    "artifacts/feature_table_filtered.csv": "52596fa7fbdd8f4c2a1ee9f6eb9277a36cfc6b7cdba2a0bf89780d7a6b044444",
+    "artifacts/feature_metadata.json": "18f50fd9a59b69c448b4a7ccf413e200f937721bb6e541e1847f2ebc62cd941f",
+    "experiments/baselines/fold_assignments.csv": "d01b58e80bb8c8cfb36e6c43a02c2b33d19525c9fcc9e41d44407f60af8510a3",
+    "configs/prediction_reliability.yaml": "55bc46c032e14ea479a79558235e41d3b4c08d912ad89c64ec1a464751e18eeb"
+  },
+  "config": {
+    "task": "Phase 10: prediction reliability, uncertainty, and ordinal prediction intervals",
+    "inputs": {
+      "feature_table": "artifacts/feature_table_filtered.csv",
+      "feature_metadata": "artifacts/feature_metadata.json",
+      "fold_assignments": "experiments/baselines/fold_assignments.csv"
+    },
+    "feature_set": "combined_unique",
+    "model": {
+      "name": "xgboost",
+      "role": "Population-only five-class model with the fixed Phase 3 strengthening configuration"
+    },
+    "split": {
+      "reuse_phase3_outer_folds": true,
+      "calibration_subject_fraction": 0.25,
+      "group_column": "subject_id",
+      "random_state": 20260909
+    },
+    "calibration": {
+      "method": "temperature_scaling",
+      "temperature_bounds": [
+        0.05,
+        10.0
+      ],
+      "ece_bins": 15
+    },
+    "selective_prediction": {
+      "coverage_grid": [
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "uncertainty_scores": [
+        "max_probability",
+        "predictive_entropy"
+      ],
+      "random_repetitions": 200
+    },
+    "conformal": {
+      "alpha_levels": [
+        0.05,
+        0.1,
+        0.2
+      ],
+      "primary_alpha_levels": [
+        0.05,
+        0.1
+      ],
+      "standard_score": "one_minus_true_class_probability",
+      "ordinal_score": "absolute_true_level_minus_expected_level"
+    },
+    "bootstrap": {
+      "unit": "subject",
+      "repetitions": 1000,
+      "confidence_level": 0.95
+    },
+    "outputs": {
+      "directory": "experiments/prediction_reliability",
+      "report": "reports/prediction_reliability.md"
+    }
+  },
+  "n_features": 59,
+  "features": [
+    "ecg_rpeak_count",
+    "ecg_rate_mean_bpm",
+    "ecg_rate_median_bpm",
+    "ecg_rate_min_bpm",
+    "ecg_rate_max_bpm",
+    "ecg_rate_range_bpm",
+    "ecg_rate_slope_bpm_per_s",
+    "ecg_rr_mean_ms",
+    "ecg_rr_median_ms",
+    "ecg_quality_mean",
+    "ecg_clean_std",
+    "ecg_clean_rms",
+    "ecg_clean_peak_to_peak",
+    "eda_scl_mean",
+    "eda_scl_median",
+    "eda_scl_std",
+    "eda_scl_min",
+    "eda_scl_max",
+    "eda_scl_range",
+    "eda_scl_auc",
+    "eda_scl_slope_per_s",
+    "eda_scl_delta",
+    "eda_scr_count",
+    "eda_scr_amplitude_max",
+    "eda_scr_amplitude_sum",
+    "emg_trapezius_mav",
+    "emg_trapezius_rms",
+    "emg_trapezius_std",
+    "emg_trapezius_iemg",
+    "emg_trapezius_energy",
+    "emg_trapezius_peak_to_peak",
+    "emg_trapezius_waveform_length",
+    "emg_trapezius_zero_crossings",
+    "emg_trapezius_activation_fraction",
+    "emg_trapezius_activation_count",
+    "emg_trapezius_activation_mean_duration_s",
+    "ecg__tsfresh_mean",
+    "ecg__tsfresh_median",
+    "ecg__tsfresh_minimum",
+    "ecg__tsfresh_maximum",
+    "ecg__tsfresh_abs_energy",
+    "ecg__tsfresh_absolute_sum_of_changes",
+    "ecg__tsfresh_mean_change",
+    "ecg__tsfresh_linear_trend_slope",
+    "ecg__tsfresh_skewness",
+    "ecg__tsfresh_kurtosis",
+    "eda__tsfresh_root_mean_square",
+    "eda__tsfresh_abs_energy",
+    "eda__tsfresh_absolute_sum_of_changes",
+    "eda__tsfresh_skewness",
+    "eda__tsfresh_kurtosis",
+    "emg_trapezius__tsfresh_mean",
+    "emg_trapezius__tsfresh_median",
+    "emg_trapezius__tsfresh_minimum",
+    "emg_trapezius__tsfresh_maximum",
+    "emg_trapezius__tsfresh_mean_change",
+    "emg_trapezius__tsfresh_linear_trend_slope",
+    "emg_trapezius__tsfresh_skewness",
+    "emg_trapezius__tsfresh_kurtosis"
+  ]
+}
