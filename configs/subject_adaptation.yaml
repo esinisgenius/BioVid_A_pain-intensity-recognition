@@ -1,0 +1,49 @@
+phase: 9
+analysis_name: subject_adaptation
+random_state: 20261025
+feature_set: phase6_preselected
+features:
+  - eda_scl_delta
+  - eda_scl_slope_per_s
+  - eda_scr_amplitude_sum
+  - eda_scr_count
+  - emg_trapezius__tsfresh_linear_trend_slope
+pain_pairs:
+  - [PA1, PA2]
+  - [PA2, PA3]
+  - [PA3, PA4]
+  - [PA1, PA3]
+  - [BL1, PA4]
+sample_efficiency:
+  k_per_class: [0, 1, 2, 5, 10]
+  repeats: 10
+models:
+  population:
+    name: logistic_regression
+    penalty: l2
+    C: 1.0
+    max_iter: 3000
+  individual:
+    name: logistic_regression
+    penalty: l2
+    C: 0.1
+    max_iter: 3000
+  adaptation:
+    name: regularized_logit_residual
+    l2_penalty: 10.0
+    max_iter: 500
+preprocessing:
+  population: [median_imputation, standard_scaling]
+  individual: [median_imputation_fit_on_adaptation_only, standard_scaling_fit_on_adaptation_only]
+bootstrap:
+  n_resamples: 2000
+  confidence_level: 0.95
+  cluster: subject_id
+inference:
+  practical_auc_gain: 0.02
+inputs:
+  feature_table: artifacts/feature_table_filtered.csv
+  fold_assignments: experiments/baselines/fold_assignments.csv
+  phase6_consistency: experiments/cross_subject_stability/subject_feature_monotonicity.csv
+  phase8_subject_gaps: experiments/within_cross_separability/subject_paired_gaps.csv
+
