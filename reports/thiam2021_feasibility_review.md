@@ -4,7 +4,7 @@ Review date: 2026-10-25
 
 Scope: supervised multimodal DDCAE with attention for BioVid Part A five-class classification. The self-supervised AVAE extension is out of scope. No full training was started during this review.
 
-Primary source: Patrick Thiam et al., *Multi-Modal Pain Intensity Assessment Based on Physiological Signals: A Deep Learning Perspective*, Frontiers in Physiology 12:720464, DOI [10.3389/fphys.2021.720464](https://doi.org/10.3389/fphys.2021.720464). The local PDF is `references/Thiam_2021_Multimodal_Pain.pdf` (21 pages; SHA-256 `9541a90f5e4252028110e5ea365cbd362155140685c60c9f22c48c68830c4ae0`).
+Primary source: Patrick Thiam et al., *Multi-Modal Pain Intensity Assessment Based on Physiological Signals: A Deep Learning Perspective*, Frontiers in Physiology 12:720464, DOI [10.3389/fphys.2021.720464](https://doi.org/10.3389/fphys.2021.720464). The local PDF is `references/Thiam_2021_Multimodal_Pain.pdf` (21 pages; SHA-256 `eb00d25c3b59945867532c7ac7a8ff659a80dd348381bca218c4cc4b18893b0c`).
 
 ## Decision
 

@@ -1,0 +1,79 @@
+task: Thiam et al. (2021) supervised multimodal DDCAE + attention smoke test
+classification: adapted_reproduction
+paper:
+  doi: 10.3389/fphys.2021.720464
+  local_pdf: references/Thiam_2021_Multimodal_Pain.pdf
+data:
+  samples: starting_point/samples.csv
+  raw_signals: biosignals_raw
+  fold_assignments: experiments/baselines/fold_assignments.csv
+  cache_directory: artifacts/thiam2021_signal_cache
+  source_rate_hz: 512
+  model_rate_hz: 256
+  local_clip_seconds: 5.5
+  paper_window_seconds: 4.5
+  local_crop_start_seconds: 1.0
+  modalities:
+  - eda
+  - ecg
+  - emg
+preprocessing:
+  eda_lowpass_hz: 0.2
+  eda_filter_order: 3
+  emg_bandpass_hz:
+  - 20.0
+  - 250.0
+  emg_filter_order: 4
+  ecg_bandpass_hz:
+  - 0.1
+  - 250.0
+  ecg_filter_order: 3
+  ecg_polynomial_detrend_degree: 5
+  standardization: fit-subject scalar mean/std per modality
+  augmentation: canonical_window_only_for_smoke
+model:
+  encoder_filters:
+  - 8
+  - 8
+  - 16
+  - 16
+  - 32
+  - 32
+  latent_dim: 256
+  modality_kernel_sizes:
+    eda: 3
+    ecg: 11
+    emg: 11
+  attention_kernel_size: 3
+  classifier_hidden: 128
+  dropout: 0.25
+  gaussian_noise_mean: 0.0
+  gaussian_noise_std: 0.1
+loss:
+  reconstruction_weights:
+    eda: 0.2
+    ecg: 0.2
+    emg: 0.2
+  classification_weight: 0.4
+  autoencoder_l2: 0.001
+training:
+  optimizer: adam
+  learning_rate: 1.0e-05
+  paper_epochs: 100
+  smoke_epochs: 2
+  batch_size: 100
+  outer_fold: 1
+  seed: 20261025
+  calibration_subject_fraction: 0.25
+  validation_subject_fraction_of_model_development: 0.2
+  early_stopping_patience: 2
+  device_preference: mps
+  num_workers: 0
+evaluation:
+  ece_bins: 15
+  conformal_alpha: 0.1
+  bootstrap_repetitions_smoke: 200
+  xgboost_predictions: experiments/model_strengthening_benchmark/oof_predictions_5class.csv
+outputs:
+  directory: experiments/thiam2021_smoke
+  report: reports/thiam2021_smoke_test.md

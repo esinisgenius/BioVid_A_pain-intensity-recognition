@@ -295,11 +295,61 @@ def xgboost_comparison(root: Path, config: dict, fold: int, test_names: set[str]
     ].copy()
     if set(frame["sample_name"]) != test_names:
         raise ValueError("XGBoost comparison does not contain the exact outer-test trials")
-    probabilities = frame[[f"proba_{name}" for name in CLASS_NAMES]].to_numpy(dtype=float)
-    result = package_metrics(frame["true_class_id"].to_numpy(dtype=int), probabilities)
+    y_true = frame["true_class_id"].to_numpy(dtype=int)
+    probability_columns = [f"proba_{name}" for name in CLASS_NAMES]
+    probabilities = frame[probability_columns].to_numpy(dtype=float)
+    if np.isfinite(probabilities).all():
+        result = package_metrics(y_true, probabilities)
+    else:
+        # The Phase 3-strengthening artifact stores XGBoost hard predictions but leaves
+        # probability columns empty. Do not manufacture probability-based AUC values.
+        prediction = frame["pred_class_id"].to_numpy(dtype=int)
+        result = {
+            "accuracy": float(accuracy_score(y_true, prediction)),
+            "macro_f1": float(f1_score(y_true, prediction, average="macro", zero_division=0)),
+            "balanced_accuracy": float(balanced_accuracy_score(y_true, prediction)),
+            "mae": float(np.mean(np.abs(y_true - prediction))),
+            "qwk": float(cohen_kappa_score(y_true, prediction, weights="quadratic")),
+            "per_class_recall": {
+                CLASS_NAMES[i]: float(value)
+                for i, value in enumerate(
+                    recall_score(y_true, prediction, labels=CLASS_IDS, average=None, zero_division=0)
+                )
+            },
+            "confusion_matrix": confusion_matrix(y_true, prediction, labels=CLASS_IDS).astype(int).tolist(),
+            "adjacent_pair_auc": None,
+            "probability_note": "Unavailable: stored XGBoost probability columns are all missing.",
+        }
     result["source"] = str(path.relative_to(root))
     result["n_test"] = len(frame)
     return result
+
+
+def phase10_reference(root: Path) -> dict[str, float]:
+    calibration = pd.read_csv(root / "experiments/prediction_reliability/calibration_metrics.csv")
+    calibration = calibration[
+        (calibration["probability_type"] == "temperature_scaled")
+        & (calibration["group_type"] == "overall")
+    ].iloc[0]
+    ranking = pd.read_csv(root / "experiments/prediction_reliability/selective_summary.csv")
+    ranking = ranking[ranking["method"] == "max_probability"].iloc[0]
+    selective = pd.read_csv(root / "experiments/prediction_reliability/selective_prediction_metrics.csv")
+    selective = selective[
+        (selective["method"] == "max_probability") & np.isclose(selective["coverage_target"], 0.5)
+    ]
+    conformal = pd.read_csv(root / "experiments/prediction_reliability/conformal_summary.csv")
+    conformal = conformal[
+        (conformal["method"] == "standard_classification")
+        & np.isclose(conformal["alpha"], 0.1)
+        & (conformal["group_type"] == "overall")
+    ].iloc[0]
+    return {
+        "temperature_scaled_ece": float(calibration["ece"]),
+        "error_detection_auroc": float(ranking["error_detection_auroc"]),
+        "selective_accuracy_at_50_percent_coverage": float(selective["accuracy"].mean()),
+        "conformal_empirical_coverage": float(conformal["empirical_coverage"]),
+        "conformal_mean_set_width": float(conformal["mean_width"]),
+    }
 
 
 def memory_snapshot(device: torch.device) -> dict[str, float]:
@@ -319,6 +369,7 @@ def write_report(path: Path, result: dict) -> None:
     metrics = result["ddcae_test_metrics"]
     xgb = result["xgboost_same_trials"]
     rel = result["reliability"]
+    phase10 = result["phase10_xgboost_reference"]
     history = result["history"]
     lines = [
         "# Thiam et al. (2021) supervised DDCAE smoke test",
@@ -332,10 +383,10 @@ def write_report(path: Path, result: dict) -> None:
         "## Execution",
         "",
         f"- Device: `{result['device']}` (MPS available: `{result['mps_available']}`).",
-        f"- Outer fold: {result['outer_fold']}; fit/validation/calibration/test subjects: {result['split_counts']['fit_subjects']}/{result['split_counts']['validation_subjects']}/{result['split_counts']['calibration_subjects']}/{result['split_counts']['test_subjects']}.",
+        f"- Outer fold: {result['outer_fold']}; fit/validation/calibration/test subjects: {result['split_counts']['fit_subjects']}/{result['split_counts']['validation_subjects']}/{result['split_counts']['calibration_subjects']}/{result['split_counts']['outer_test_subjects']}.",
         f"- Epochs run: {len(history)} of 100 paper epochs; batch size: {result['batch_size']}; learning rate: {result['learning_rate']}.",
         f"- Epoch wall time: {result['runtime']['epoch_seconds_mean']:.2f} s mean ({result['runtime']['epoch_seconds_min']:.2f}-{result['runtime']['epoch_seconds_max']:.2f} s).",
-        f"- Single-fold 100-epoch projection: {result['runtime']['projected_single_fold_hours_100_epochs']:.2f} h; five folds x one seed: {result['runtime']['projected_5fold_1seed_hours']:.2f} h; five folds x three seeds: {result['runtime']['projected_5fold_3seed_hours']:.2f} h. Projections exclude cache construction and final reliability evaluation.",
+        f"- Warm-up-aware steady-state projection: {result['runtime']['projected_single_fold_hours_100_epochs_steady']:.2f} h per fold, {result['runtime']['projected_5fold_1seed_hours_steady']:.2f} h for five folds x one seed, and {result['runtime']['projected_5fold_3seed_hours_steady']:.2f} h for five folds x three seeds. A conservative all-epoch-mean projection is {result['runtime']['projected_5fold_1seed_hours']:.2f}/{result['runtime']['projected_5fold_3seed_hours']:.2f} h. Projections exclude cache construction and final reliability evaluation.",
         f"- Peak process RSS: {result['memory']['process_peak_rss_mb']:.1f} MB; MPS current/driver allocation: {result['memory'].get('mps_current_allocated_mb', float('nan')):.1f}/{result['memory'].get('mps_driver_allocated_mb', float('nan')):.1f} MB.",
         "",
         "## Loss sanity check",
@@ -388,11 +439,17 @@ def write_report(path: Path, result: dict) -> None:
             f"- Accuracy at 50% selective coverage: {rel['selective_accuracy_at_50_percent_coverage']:.4f}.",
             f"- 90% split-conformal target: empirical coverage {rel['conformal_empirical_coverage']:.4f}, mean set width {rel['conformal_mean_set_width']:.3f} of five labels.",
             "",
-            "These values verify that the Phase 10-style, subject-disjoint calibration path works with DDCAE probabilities. They cannot yet answer whether the reliability-resolution trade-off persists after a published deep model is trained: a two-epoch checkpoint has not learned the intended classifier. That question is deferred until an approved full-scale run.",
+            "For context, the completed five-fold Phase 10 XGBoost run had temperature-scaled ECE "
+            f"{phase10['temperature_scaled_ece']:.4f}, error-detection AUROC {phase10['error_detection_auroc']:.4f}, "
+            f"50%-coverage accuracy {phase10['selective_accuracy_at_50_percent_coverage']:.4f}, and 90% conformal coverage/width "
+            f"{phase10['conformal_empirical_coverage']:.4f}/{phase10['conformal_mean_set_width']:.3f}. The two-epoch DDCAE is worse in risk ranking and resolution; its very low ECE is caused by nearly uniform probabilities and temperature hitting the upper bound, not useful calibration.",
+            "",
+            "These values verify that the Phase 10-style, subject-disjoint calibration path works with DDCAE probabilities. They cannot yet answer whether the reliability-resolution trade-off persists after a published deep model is trained: a two-epoch checkpoint collapsed to PA2 and has not learned the intended classifier. The formal answer is therefore **undetermined after smoke testing**; it is deferred until an approved full-scale run.",
             "",
             "## Reproducibility",
             "",
-            f"- Command: `{result['command']}`",
+            f"- Training command: `{result['command']}`",
+            f"- Finalization command: `{result['finalization_command']}`",
             f"- Seed: `{result['seed']}`",
             f"- Model checkpoint SHA-256: `{result['checkpoint_sha256']}`",
             f"- Raw-signal collection SHA-256: `{result['input_hashes']['raw_signal_collection_sha256']}`",
@@ -417,6 +474,11 @@ def main() -> None:
     parser.add_argument("--fold", type=int)
     parser.add_argument("--epochs", type=int)
     parser.add_argument("--rebuild-cache", action="store_true")
+    parser.add_argument(
+        "--finalize-existing",
+        action="store_true",
+        help="Load the already trained checkpoint/history and only regenerate evaluation outputs.",
+    )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     config_path = args.config if args.config.is_absolute() else root / args.config
@@ -476,34 +538,46 @@ def main() -> None:
 
     device = choose_device(str(config["training"]["device_preference"]))
     model = ThiamSupervisedDDCAE(config).to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr=float(config["training"]["learning_rate"]))
-    history = []
-    best_epoch = 0
-    best_loss = float("inf")
-    best_state = None
-    patience = 0
-    for epoch in range(1, epochs + 1):
-        started = time.perf_counter()
-        train_metrics = run_epoch(model, loaders["fit"], config, device, optimizer)
-        validation_metrics = run_epoch(model, loaders["validation"], config, device, None)
-        seconds = time.perf_counter() - started
-        row = {"epoch": epoch, "seconds": seconds}
-        row.update({f"train_{name}": value for name, value in train_metrics.items()})
-        row.update({f"validation_{name}": value for name, value in validation_metrics.items()})
-        history.append(row)
-        print(json.dumps(row, sort_keys=True), flush=True)
-        if validation_metrics["total"] < best_loss:
-            best_loss = validation_metrics["total"]
-            best_epoch = epoch
-            best_state = {name: value.detach().cpu().clone() for name, value in model.state_dict().items()}
-            patience = 0
-        else:
-            patience += 1
-            if patience >= int(config["training"]["early_stopping_patience"]):
-                break
-    if best_state is None:
-        raise RuntimeError("Training did not produce a checkpoint")
-    model.load_state_dict(best_state)
+    output_dir = root / config["outputs"]["directory"]
+    output_dir.mkdir(parents=True, exist_ok=True)
+    checkpoint_path = output_dir / "best_model.pt"
+    history_path = output_dir / "training_history.csv"
+    if args.finalize_existing:
+        if not checkpoint_path.exists() or not history_path.exists():
+            raise FileNotFoundError("Cannot finalize: checkpoint or training history is missing")
+        history = pd.read_csv(history_path).to_dict(orient="records")
+        best_epoch = int(min(history, key=lambda row: row["validation_total"])["epoch"])
+        best_state = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
+        model.load_state_dict(best_state)
+    else:
+        optimizer = torch.optim.Adam(model.parameters(), lr=float(config["training"]["learning_rate"]))
+        history = []
+        best_epoch = 0
+        best_loss = float("inf")
+        best_state = None
+        patience = 0
+        for epoch in range(1, epochs + 1):
+            started = time.perf_counter()
+            train_metrics = run_epoch(model, loaders["fit"], config, device, optimizer)
+            validation_metrics = run_epoch(model, loaders["validation"], config, device, None)
+            seconds = time.perf_counter() - started
+            row = {"epoch": epoch, "seconds": seconds}
+            row.update({f"train_{name}": value for name, value in train_metrics.items()})
+            row.update({f"validation_{name}": value for name, value in validation_metrics.items()})
+            history.append(row)
+            print(json.dumps(row, sort_keys=True), flush=True)
+            if validation_metrics["total"] < best_loss:
+                best_loss = validation_metrics["total"]
+                best_epoch = epoch
+                best_state = {name: value.detach().cpu().clone() for name, value in model.state_dict().items()}
+                patience = 0
+            else:
+                patience += 1
+                if patience >= int(config["training"]["early_stopping_patience"]):
+                    break
+        if best_state is None:
+            raise RuntimeError("Training did not produce a checkpoint")
+        model.load_state_dict(best_state)
 
     calibration_indices, calibration_raw = predict(model, loaders["calibration"], device)
     test_indices, test_raw = predict(model, loaders["outer_test"], device)
@@ -514,10 +588,8 @@ def main() -> None:
     )
     metrics = package_metrics(test_y, test_calibrated)
 
-    output_dir = root / config["outputs"]["directory"]
-    output_dir.mkdir(parents=True, exist_ok=True)
-    checkpoint_path = output_dir / "best_model.pt"
-    torch.save(best_state, checkpoint_path)
+    if not args.finalize_existing:
+        torch.save(best_state, checkpoint_path)
     predictions = samples.iloc[test_indices][
         ["subject_id", "subject_name", "sample_id", "sample_name", "class_id", "class_name"]
     ].copy()
@@ -531,7 +603,7 @@ def main() -> None:
     predictions.to_csv(output_dir / "outer_test_predictions.csv", index=False)
     subject_frame = subject_metrics(predictions)
     subject_frame.to_csv(output_dir / "subject_metrics.csv", index=False)
-    pd.DataFrame(history).to_csv(output_dir / "training_history.csv", index=False)
+    pd.DataFrame(history).to_csv(history_path, index=False)
     pd.DataFrame(
         [
             {"subject_id": int(subject), "role": role, "fold": fold}
@@ -546,6 +618,7 @@ def main() -> None:
 
     epoch_seconds = [row["seconds"] for row in history]
     mean_epoch = float(np.mean(epoch_seconds))
+    steady_epoch = float(epoch_seconds[-1])
     xgb = xgboost_comparison(root, config, fold, set(predictions["sample_name"]))
     ci = bootstrap_subject_ci(
         predictions,
@@ -561,10 +634,25 @@ def main() -> None:
             dependencies[package] = "not-installed"
     fold_path = root / config["data"]["fold_assignments"]
     paper_path = root / config["paper"]["local_pdf"]
+    training_command = " ".join(
+        shlex.quote(value)
+        for value in [
+            sys.executable,
+            "-m",
+            "src.models.run_thiam2021_reproduction",
+            "--config",
+            str(args.config),
+            "--fold",
+            str(fold),
+            "--epochs",
+            str(epochs),
+        ]
+    )
     result = {
         "run_timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "classification": config["classification"],
-        "command": " ".join(shlex.quote(value) for value in [sys.executable, *sys.argv]),
+        "command": training_command,
+        "finalization_command": " ".join(shlex.quote(value) for value in [sys.executable, *sys.argv]),
         "outer_fold": fold,
         "seed": seed,
         "device": str(device),
@@ -581,6 +669,7 @@ def main() -> None:
         "ddcae_test_metrics": metrics,
         "ddcae_subject_clustered_95_ci": ci,
         "reliability": reliability,
+        "phase10_xgboost_reference": phase10_reference(root),
         "xgboost_same_trials": xgb,
         "runtime": {
             "cache_preprocessing_seconds": float(cache_manifest["preprocessing_seconds"]),
@@ -590,6 +679,10 @@ def main() -> None:
             "projected_single_fold_hours_100_epochs": mean_epoch * 100 / 3600,
             "projected_5fold_1seed_hours": mean_epoch * 100 * 5 / 3600,
             "projected_5fold_3seed_hours": mean_epoch * 100 * 5 * 3 / 3600,
+            "steady_epoch_seconds": steady_epoch,
+            "projected_single_fold_hours_100_epochs_steady": (epoch_seconds[0] + steady_epoch * 99) / 3600,
+            "projected_5fold_1seed_hours_steady": (epoch_seconds[0] + steady_epoch * 99) * 5 / 3600,
+            "projected_5fold_3seed_hours_steady": (epoch_seconds[0] + steady_epoch * 99) * 5 * 3 / 3600,
         },
         "memory": memory_snapshot(device),
         "input_hashes": {

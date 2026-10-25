@@ -1,0 +1,290 @@
+{
+  "run_timestamp_utc": "2026-10-25T11:51:44.267761+00:00",
+  "classification": "adapted_reproduction",
+  "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 -m src.models.run_thiam2021_reproduction --config configs/thiam2021_smoke.yaml --fold 1 --epochs 2",
+  "finalization_command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 '/Users/liangyingxin/Desktop/BioVid_A /src/models/run_thiam2021_reproduction.py' --config configs/thiam2021_smoke.yaml --fold 1 --epochs 2 --finalize-existing",
+  "outer_fold": 1,
+  "seed": 20261025,
+  "device": "mps",
+  "mps_available": true,
+  "batch_size": 100,
+  "learning_rate": 1e-05,
+  "best_epoch": 2,
+  "split_counts": {
+    "fit_subjects": 42,
+    "validation_subjects": 10,
+    "calibration_subjects": 18,
+    "outer_test_subjects": 17,
+    "fit_trials": 4200,
+    "validation_trials": 1000,
+    "calibration_trials": 1800,
+    "outer_test_trials": 1700
+  },
+  "standardization_fit_subjects_only": {
+    "eda": {
+      "mean": 3.3000249538969104,
+      "std": 2.9626693449190378
+    },
+    "ecg": {
+      "mean": 0.1471297570308835,
+      "std": 285.5834582870156
+    },
+    "emg": {
+      "mean": -8.044664651981632e-05,
+      "std": 12.065420213504455
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "seconds": 12.113022666075269,
+      "train_reconstruction_eda": 1.0141653681085223,
+      "train_l2_eda": 177.27564602806456,
+      "train_reconstruction_ecg": 1.0049284143107278,
+      "train_l2_ecg": 176.13787623814173,
+      "train_reconstruction_emg": 1.0001941067831857,
+      "train_l2_emg": 176.1764947800409,
+      "train_classification": 1.610878240494501,
+      "train_total": 1.354126907530285,
+      "validation_reconstruction_eda": 0.7844073854386806,
+      "validation_l2_eda": 175.48826599121094,
+      "validation_reconstruction_ecg": 1.189356657862663,
+      "validation_l2_ecg": 174.240478515625,
+      "validation_reconstruction_emg": 1.6756955526769162,
+      "validation_l2_emg": 174.1919708251953,
+      "validation_classification": 1.610613775253296,
+      "validation_total": 1.47892165184021
+    },
+    {
+      "epoch": 2,
+      "seconds": 3.596794833079912,
+      "train_reconstruction_eda": 1.0134148406130927,
+      "train_l2_eda": 173.80945296514602,
+      "train_reconstruction_ecg": 1.0031308106013708,
+      "train_l2_ecg": 172.4543729509626,
+      "train_reconstruction_emg": 1.000098617303939,
+      "train_l2_emg": 172.32467469714936,
+      "train_classification": 1.610609145391555,
+      "train_total": 1.3512902458508809,
+      "validation_reconstruction_eda": 0.7837164097465574,
+      "validation_l2_eda": 172.06002807617188,
+      "validation_reconstruction_ecg": 1.1877520680427551,
+      "validation_l2_ecg": 170.5930633544922,
+      "validation_reconstruction_emg": 1.6756278447806836,
+      "validation_l2_emg": 170.37997436523438,
+      "validation_classification": 1.6105847477912902,
+      "validation_total": 1.4762597680091858
+    }
+  ],
+  "ddcae_test_metrics": {
+    "accuracy": 0.2,
+    "macro_f1": 0.06666666666666667,
+    "balanced_accuracy": 0.2,
+    "mae": 1.2,
+    "qwk": 0.0,
+    "per_class_recall": {
+      "BL1": 0.0,
+      "PA1": 0.0,
+      "PA2": 1.0,
+      "PA3": 0.0,
+      "PA4": 0.0
+    },
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        340,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        340,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        340,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        340,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        340,
+        0,
+        0
+      ]
+    ],
+    "adjacent_pair_auc": {
+      "BL1_vs_PA1": 0.5175000000000001,
+      "PA1_vs_PA2": 0.5105622837370243,
+      "PA2_vs_PA3": 0.48115051903114187,
+      "PA3_vs_PA4": 0.5020544982698962
+    }
+  },
+  "ddcae_subject_clustered_95_ci": {
+    "accuracy": {
+      "estimate": 0.2,
+      "ci_low": 0.2,
+      "ci_high": 0.2
+    },
+    "macro_f1": {
+      "estimate": 0.06666666666666667,
+      "ci_low": 0.06666666666666667,
+      "ci_high": 0.06666666666666667
+    },
+    "balanced_accuracy": {
+      "estimate": 0.2,
+      "ci_low": 0.2,
+      "ci_high": 0.2
+    },
+    "mae": {
+      "estimate": 1.2,
+      "ci_low": 1.2,
+      "ci_high": 1.2
+    },
+    "qwk": {
+      "estimate": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0
+    }
+  },
+  "reliability": {
+    "temperature": 9.999999375796115,
+    "temperature_scaled_ece": 0.0016267798392226585,
+    "error_detection_auroc": 0.49254757785467124,
+    "selective_accuracy_at_50_percent_coverage": 0.18588235294117647,
+    "conformal_target_coverage": 0.9,
+    "conformal_empirical_coverage": 0.9135294117647059,
+    "conformal_mean_set_width": 4.594117647058823,
+    "conformal_threshold": 0.8009797123566279
+  },
+  "phase10_xgboost_reference": {
+    "temperature_scaled_ece": 0.0148343740273154,
+    "error_detection_auroc": 0.6207171224732462,
+    "selective_accuracy_at_50_percent_coverage": 0.4082745098039215,
+    "conformal_empirical_coverage": 0.9022988505747126,
+    "conformal_mean_set_width": 3.681149425287357
+  },
+  "xgboost_same_trials": {
+    "accuracy": 0.33294117647058824,
+    "macro_f1": 0.30014481437473367,
+    "balanced_accuracy": 0.3329411764705882,
+    "mae": 1.15,
+    "qwk": 0.47748303516347934,
+    "per_class_recall": {
+      "BL1": 0.6029411764705882,
+      "PA1": 0.20588235294117646,
+      "PA2": 0.06470588235294118,
+      "PA3": 0.2,
+      "PA4": 0.5911764705882353
+    },
+    "confusion_matrix": [
+      [
+        205,
+        75,
+        24,
+        22,
+        14
+      ],
+      [
+        162,
+        70,
+        24,
+        44,
+        40
+      ],
+      [
+        127,
+        60,
+        22,
+        73,
+        58
+      ],
+      [
+        86,
+        43,
+        26,
+        68,
+        117
+      ],
+      [
+        29,
+        42,
+        16,
+        52,
+        201
+      ]
+    ],
+    "adjacent_pair_auc": null,
+    "probability_note": "Unavailable: stored XGBoost probability columns are all missing.",
+    "source": "experiments/model_strengthening_benchmark/oof_predictions_5class.csv",
+    "n_test": 1700
+  },
+  "runtime": {
+    "cache_preprocessing_seconds": 24.320638875011355,
+    "epoch_seconds_mean": 7.85490874957759,
+    "epoch_seconds_min": 3.596794833079912,
+    "epoch_seconds_max": 12.113022666075269,
+    "projected_single_fold_hours_100_epochs": 0.21819190971048863,
+    "projected_5fold_1seed_hours": 1.090959548552443,
+    "projected_5fold_3seed_hours": 3.2728786456573293,
+    "steady_epoch_seconds": 3.596794833079912,
+    "projected_single_fold_hours_100_epochs_steady": 0.10227658642805183,
+    "projected_5fold_1seed_hours_steady": 0.5113829321402591,
+    "projected_5fold_3seed_hours_steady": 1.5341487964207774
+  },
+  "memory": {
+    "process_peak_rss_mb": 646.59375,
+    "mps_current_allocated_mb": 7.015380859375,
+    "mps_driver_allocated_mb": 66.8125
+  },
+  "input_hashes": {
+    "raw_signal_collection_sha256": "b0d460d5e0048070ff832f5572dbf216033b127da59efcccd6bcb17e52e89837",
+    "samples_sha256": "5e98de3957cc998e18c2d6d65b699ce613a484e0d2a1fb8afaec3f3877ac61fe",
+    "fold_assignments_sha256": "d01b58e80bb8c8cfb36e6c43a02c2b33d19525c9fcc9e41d44407f60af8510a3",
+    "paper_pdf_sha256": "eb00d25c3b59945867532c7ac7a8ff659a80dd348381bca218c4cc4b18893b0c",
+    "xgboost_predictions_sha256": "c299e2d5e8c5a52c4dda1f51d7587b7508a4c3eabd6725cff35bd26e96b661ab"
+  },
+  "checkpoint_sha256": "b416d4dffcab60274b1b361409361bd8514f0fef3eaa13a969007007630141a0",
+  "dependencies": {
+    "torch": "2.8.0",
+    "numpy": "2.3.3",
+    "pandas": "2.3.2",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.0",
+    "PyYAML": "6.0.3"
+  },
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "python": "3.13.3 (v3.13.3:6280bb54784, Apr  8 2025, 10:47:54) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "paper_fidelity": {
+    "faithful_components": [
+      "three ECG/EDA/EMG inputs",
+      "1152 samples at 256 Hz",
+      "reported six-stage DDCAE widths and modality kernels",
+      "attention after each encoder convolution",
+      "feature-wise latent gate and 128-unit classifier",
+      "joint weighted reconstruction/classification loss",
+      "Gaussian noise, Adam learning rate, and batch size"
+    ],
+    "adaptations": [
+      "fixed Phase 3 five outer folds instead of 87-fold LOSO",
+      "nested validation/calibration subject splits",
+      "canonical window only in smoke test instead of nine-window augmentation",
+      "per-clip filtering and assumed one-second crop due lack of continuous data/event trigger",
+      "fit-subject-only per-modality scalar standardization because paper omits amplitude normalization",
+      "PyTorch independent implementation because no official code was found"
+    ]
+  }
+}
