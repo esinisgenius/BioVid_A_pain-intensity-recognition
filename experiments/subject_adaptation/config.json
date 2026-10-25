@@ -1,0 +1,126 @@
+{
+  "phase": 9,
+  "analysis_name": "subject_adaptation",
+  "random_state": 20261025,
+  "feature_set": "phase6_preselected",
+  "features": [
+    "eda_scl_delta",
+    "eda_scl_slope_per_s",
+    "eda_scr_amplitude_sum",
+    "eda_scr_count",
+    "emg_trapezius__tsfresh_linear_trend_slope"
+  ],
+  "pain_pairs": [
+    [
+      "PA1",
+      "PA2"
+    ],
+    [
+      "PA2",
+      "PA3"
+    ],
+    [
+      "PA3",
+      "PA4"
+    ],
+    [
+      "PA1",
+      "PA3"
+    ],
+    [
+      "BL1",
+      "PA4"
+    ]
+  ],
+  "sample_efficiency": {
+    "k_per_class": [
+      0,
+      1,
+      2,
+      5,
+      10
+    ],
+    "repeats": 10
+  },
+  "models": {
+    "population": {
+      "name": "logistic_regression",
+      "penalty": "l2",
+      "C": 1.0,
+      "max_iter": 3000
+    },
+    "individual": {
+      "name": "logistic_regression",
+      "penalty": "l2",
+      "C": 0.1,
+      "max_iter": 3000
+    },
+    "adaptation": {
+      "name": "regularized_logit_residual",
+      "l2_penalty": 10.0,
+      "max_iter": 500
+    }
+  },
+  "preprocessing": {
+    "population": [
+      "median_imputation",
+      "standard_scaling"
+    ],
+    "individual": [
+      "median_imputation_fit_on_adaptation_only",
+      "standard_scaling_fit_on_adaptation_only"
+    ]
+  },
+  "bootstrap": {
+    "n_resamples": 2000,
+    "confidence_level": 0.95,
+    "cluster": "subject_id"
+  },
+  "inference": {
+    "practical_auc_gain": 0.02
+  },
+  "inputs": {
+    "feature_table": "artifacts/feature_table_filtered.csv",
+    "fold_assignments": "experiments/baselines/fold_assignments.csv",
+    "phase6_consistency": "experiments/cross_subject_stability/subject_feature_monotonicity.csv",
+    "phase8_subject_gaps": "experiments/within_cross_separability/subject_paired_gaps.csv"
+  },
+  "run_date_utc": "2026-10-25T10:08:48.322204+00:00",
+  "n_subjects": 87,
+  "n_trials": 8700,
+  "n_outer_folds": 5,
+  "outer_protocol": "reused Phase 3 StratifiedGroupKFold assignments",
+  "input_hashes": {
+    "feature_table": {
+      "path": "artifacts/feature_table_filtered.csv",
+      "sha256": "52596fa7fbdd8f4c2a1ee9f6eb9277a36cfc6b7cdba2a0bf89780d7a6b044444"
+    },
+    "fold_assignments": {
+      "path": "experiments/baselines/fold_assignments.csv",
+      "sha256": "d01b58e80bb8c8cfb36e6c43a02c2b33d19525c9fcc9e41d44407f60af8510a3"
+    },
+    "phase6_consistency": {
+      "path": "experiments/cross_subject_stability/subject_feature_monotonicity.csv",
+      "sha256": "ff1da111afd7fa507de616e1d5c17149f5e6c6d5e17faf4d14f4f34e88b1d023"
+    },
+    "phase8_subject_gaps": {
+      "path": "experiments/within_cross_separability/subject_paired_gaps.csv",
+      "sha256": "cf6f64e725698be1715fbeee00c81436a3d18874dc88b7d8cdfdf456cba398dd"
+    }
+  },
+  "config_file": {
+    "path": "configs/subject_adaptation.yaml",
+    "sha256": "36113400f32bce48c02d1a0d4e0d33f0dc46614375998844c74c915e18593b4e"
+  },
+  "dependencies": {
+    "python": "3.13.5",
+    "numpy": "2.4.4",
+    "pandas": "2.3.3",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.8.0",
+    "matplotlib": "3.10.8",
+    "PyYAML": "6.0.2"
+  },
+  "command": "/opt/anaconda3/bin/python -m src.models.run_subject_adaptation --root . --config configs/subject_adaptation.yaml --output-dir experiments/subject_adaptation",
+  "output_dir": "experiments/subject_adaptation"
+}
