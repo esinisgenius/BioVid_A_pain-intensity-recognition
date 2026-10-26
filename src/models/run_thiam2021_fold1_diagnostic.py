@@ -56,7 +56,7 @@ def gradient_norm(parameters) -> float:
     found = False
     for parameter in parameters:
         if parameter.grad is not None:
-            squared += parameter.grad.detach().double().square().sum().cpu()
+            squared += parameter.grad.detach().float().square().sum().cpu().double()
             found = True
     return float(torch.sqrt(squared)) if found else 0.0
 
