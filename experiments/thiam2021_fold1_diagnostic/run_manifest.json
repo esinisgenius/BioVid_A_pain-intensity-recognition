@@ -1,0 +1,360 @@
+{
+  "run_timestamp_utc": "2026-10-26T07:35:21.910283+00:00",
+  "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 '/Users/liangyingxin/Desktop/BioVid_A /src/models/run_thiam2021_fold1_diagnostic.py' --config configs/thiam2021_fold1_diagnostic.yaml",
+  "outer_fold": 1,
+  "seed": 20261025,
+  "device": "mps",
+  "mps_available": true,
+  "parameter_counts": {
+    "total": 1834742,
+    "trainable": 1834742,
+    "autoencoders": 1013233,
+    "gate": 787968,
+    "classifier": 33541
+  },
+  "split_counts": {
+    "fit_subjects": 42,
+    "validation_subjects": 10,
+    "calibration_held_out_unused_subjects": 18,
+    "outer_test_subjects": 17,
+    "fit_trials": 4200,
+    "validation_trials": 1000,
+    "calibration_held_out_unused_trials": 1800,
+    "outer_test_trials": 1700
+  },
+  "standardization_fit_subjects_only": {
+    "eda": {
+      "mean": 3.3000249538969104,
+      "std": 2.9626693449190378
+    },
+    "ecg": {
+      "mean": 0.1471297570308835,
+      "std": 285.5834582870156
+    },
+    "emg": {
+      "mean": -8.044664651981632e-05,
+      "std": 12.065420213504455
+    }
+  },
+  "epochs_completed": 50,
+  "best_epoch": 50,
+  "best_validation_total_loss": 1.4073219120502471,
+  "termination_reason": "persistent_single_class_collapse",
+  "early_stopping": {
+    "metric": "validation_total",
+    "patience": 15,
+    "min_delta": 0.0,
+    "epochs_without_improvement_at_stop": 0
+  },
+  "collapse_rule": {
+    "start_epoch": 50,
+    "patience": 15,
+    "consecutive_collapse_at_stop": 50
+  },
+  "convergence_gate_passed": false,
+  "convergence_gate_reason": "train predicts only 1 class(es)",
+  "outer_test_evaluated": false,
+  "initial": {
+    "train": {
+      "losses": {
+        "reconstruction_eda": 1.0145604942892013,
+        "l2_eda": 178.99127197265625,
+        "reconstruction_ecg": 1.0059461229968638,
+        "l2_ecg": 177.9578399658203,
+        "reconstruction_emg": 1.0002607264156853,
+        "l2_emg": 178.0801544189453,
+        "classification": 1.6106506330626351,
+        "total": 1.3554196244194394,
+        "reconstruction_sum": 3.0207673437017504
+      },
+      "accuracy": 0.2,
+      "macro_f1": 0.06666666666666667,
+      "per_class_recall": {
+        "BL1": 0.0,
+        "PA1": 0.0,
+        "PA2": 1.0,
+        "PA3": 0.0,
+        "PA4": 0.0
+      },
+      "prediction_counts": {
+        "BL1": 0,
+        "PA1": 0,
+        "PA2": 4200,
+        "PA3": 0,
+        "PA4": 0
+      },
+      "distinct_predicted_classes": 1,
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          840,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          840,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          840,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          840,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          840,
+          0,
+          0
+        ]
+      ]
+    },
+    "validation": {
+      "losses": {
+        "reconstruction_eda": 0.7851210419088602,
+        "l2_eda": 178.99127197265625,
+        "reconstruction_ecg": 1.1913726910948754,
+        "l2_ecg": 177.9578399658203,
+        "reconstruction_emg": 1.6758210971951484,
+        "l2_emg": 178.0801544189453,
+        "classification": 1.610650658607483,
+        "total": 1.4817291378974915,
+        "reconstruction_sum": 3.652314830198884
+      },
+      "accuracy": 0.2,
+      "macro_f1": 0.06666666666666667,
+      "per_class_recall": {
+        "BL1": 0.0,
+        "PA1": 0.0,
+        "PA2": 1.0,
+        "PA3": 0.0,
+        "PA4": 0.0
+      },
+      "prediction_counts": {
+        "BL1": 0,
+        "PA1": 0,
+        "PA2": 1000,
+        "PA3": 0,
+        "PA4": 0
+      },
+      "distinct_predicted_classes": 1,
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          200,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          200,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          200,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          200,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          200,
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "best_checkpoint": {
+    "train": {
+      "losses": {
+        "reconstruction_eda": 1.0000418433586933,
+        "l2_eda": 68.66234588623047,
+        "reconstruction_ecg": 0.9999960380650702,
+        "l2_ecg": 58.33884048461914,
+        "reconstruction_emg": 1.0000038766967398,
+        "l2_emg": 56.54986572265625,
+        "classification": 1.6097429139273507,
+        "total": 1.2806157711006345,
+        "reconstruction_sum": 3.000041758120503
+      },
+      "accuracy": 0.2,
+      "macro_f1": 0.06666666666666667,
+      "per_class_recall": {
+        "BL1": 0.0,
+        "PA1": 0.0,
+        "PA2": 1.0,
+        "PA3": 0.0,
+        "PA4": 0.0
+      },
+      "prediction_counts": {
+        "BL1": 0,
+        "PA1": 0,
+        "PA2": 4200,
+        "PA3": 0,
+        "PA4": 0
+      },
+      "distinct_predicted_classes": 1,
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          840,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          840,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          840,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          840,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          840,
+          0,
+          0
+        ]
+      ]
+    },
+    "validation": {
+      "losses": {
+        "reconstruction_eda": 0.7726568994577974,
+        "l2_eda": 68.66234588623047,
+        "reconstruction_ecg": 1.1853522270917893,
+        "l2_ecg": 58.33884048461914,
+        "reconstruction_emg": 1.6755633600056172,
+        "l2_emg": 56.54986572265625,
+        "classification": 1.6097429275512696,
+        "total": 1.4073219120502471,
+        "reconstruction_sum": 3.633572486555204
+      },
+      "accuracy": 0.2,
+      "macro_f1": 0.06666666666666667,
+      "per_class_recall": {
+        "BL1": 0.0,
+        "PA1": 0.0,
+        "PA2": 1.0,
+        "PA3": 0.0,
+        "PA4": 0.0
+      },
+      "prediction_counts": {
+        "BL1": 0,
+        "PA1": 0,
+        "PA2": 1000,
+        "PA3": 0,
+        "PA4": 0
+      },
+      "distinct_predicted_classes": 1,
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          200,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          200,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          200,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          200,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          200,
+          0,
+          0
+        ]
+      ]
+    },
+    "outer_test": null
+  },
+  "runtime": {
+    "total_training_and_epoch_evaluation_seconds": 370.05142391694244,
+    "epoch_seconds_mean": 7.236243828332517,
+    "epoch_seconds_min": 6.505647041951306,
+    "epoch_seconds_max": 8.355018624919467
+  },
+  "memory": {
+    "process_peak_rss_mb": 731.125,
+    "mps_current_allocated_mb": 97.22607421875,
+    "mps_driver_allocated_mb": 373.546875
+  },
+  "input_hashes": {
+    "raw_signal_collection_sha256": "b0d460d5e0048070ff832f5572dbf216033b127da59efcccd6bcb17e52e89837",
+    "samples_sha256": "5e98de3957cc998e18c2d6d65b699ce613a484e0d2a1fb8afaec3f3877ac61fe",
+    "fold_assignments_sha256": "d01b58e80bb8c8cfb36e6c43a02c2b33d19525c9fcc9e41d44407f60af8510a3",
+    "paper_pdf_sha256": "eb00d25c3b59945867532c7ac7a8ff659a80dd348381bca218c4cc4b18893b0c",
+    "config_sha256": "b3ab787b6c83404954246b7720ed408e959fa356e9c2ecfd2e87a891f43e82bf"
+  },
+  "checkpoint_sha256": "5d8a491d86ab5e2b81ffe4daf26bb721a3bc1f42e378a67e5c164c7278921cb3",
+  "dependencies": {
+    "torch": "2.8.0",
+    "numpy": "2.3.3",
+    "pandas": "2.3.2",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.0",
+    "matplotlib": "3.10.6",
+    "PyYAML": "6.0.3"
+  },
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "python": "3.13.3 (v3.13.3:6280bb54784, Apr  8 2025, 10:47:54) [Clang 15.0.0 (clang-1500.3.9.4)]"
+}
