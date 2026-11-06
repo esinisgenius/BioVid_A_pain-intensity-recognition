@@ -1,0 +1,17 @@
+{
+  "source": "experiments/xgb_fiveclass_transfer/predictions.csv.gz",
+  "source_sha256": "79731533da8075c673a950c13b8326ad9fbf24af58259567155334cca0146c57",
+  "seed": 20261106,
+  "bootstrap_resamples": 10000,
+  "bootstrap_unit": "subject, paired; common resamples across metrics",
+  "interval": "pointwise percentile 95%; not simultaneous; no hypothesis tests",
+  "within_aggregation": "mean of ten repeat-level F1 scores; no probability averaging",
+  "zero_division": 0,
+  "tie_tolerance": 1e-12,
+  "font": "/System/Library/Fonts/Supplemental/Times New Roman.ttf",
+  "n_subjects": 87,
+  "n_cross_predictions": 8700,
+  "n_within_predictions": 87000,
+  "prior_metric_check": "all subject/metric values agree within 1e-12",
+  "no_training": true
+}
